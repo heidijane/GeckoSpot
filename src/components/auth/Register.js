@@ -12,7 +12,7 @@ export const Register = (props) => {
             .then(_ => _.json())
             .then(user => {
                 if (user.length) {
-                    return true
+                   return true
                 }
                 return false
             })
@@ -23,7 +23,8 @@ export const Register = (props) => {
 
         if (password.current.value === verifyPassword.current.value) {
             existingUserCheck()
-                .then(() => {
+                .then(exists => {
+                    if (!exists) {
                     fetch("http://localhost:8088/users", {
                         method: "POST",
                         headers: {
@@ -42,6 +43,9 @@ export const Register = (props) => {
                                 props.toggle()
                             }
                         })
+                    } else {
+                        window.alert("User with this name already exists")
+                    }
                 })
         } else {
             window.alert("Passwords do not match")
