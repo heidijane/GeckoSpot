@@ -2,14 +2,13 @@ import React, { useRef } from "react"
 
 
 export const Register = (props) => {
-    const firstName = useRef()
-    const lastName = useRef()
+    const username = useRef()
     const email = useRef()
     const password = useRef()
     const verifyPassword = useRef()
 
     const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/users?email=${email.current.value}`)
+        return fetch(`http://localhost:8088/users?username=${username.current.value}`)
             .then(_ => _.json())
             .then(user => {
                 if (user.length) {
@@ -31,9 +30,9 @@ export const Register = (props) => {
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify({
+                            username: username.current.value,
                             email: email.current.value,
                             password: password.current.value,
-                            name: `${firstName.current.value} ${lastName.current.value}`
                         })
                     })
                         .then(_ => _.json())
@@ -54,20 +53,12 @@ export const Register = (props) => {
             <form className="form--register" onSubmit={handleRegister}>
                 <h4 className="darkgray">If you are not a customer yet, please register a new account</h4>
                 <fieldset>
-                    <label htmlFor="firstName"> First Name </label>
-                    <input ref={firstName} type="text"
-                        name="firstName"
+                    <label htmlFor="username"> Username </label>
+                    <input ref={username} type="text"
+                        name="username"
                         className="form-control"
-                        placeholder="First name"
+                        placeholder="username"
                         required  />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="lastName"> Last Name </label>
-                    <input ref={lastName} type="text"
-                        name="lastName"
-                        className="form-control"
-                        placeholder="Last name"
-                        required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputEmail"> Email address </label>
