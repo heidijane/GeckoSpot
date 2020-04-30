@@ -4,7 +4,7 @@ import DatePicker from "reactstrap-date-picker"
 import "./AddGeckoForm.css"
 import { GeckoContext } from "./GeckoProvider"
 
-export default () => {
+export default ({ toggle, morphToggle, setMorphGeckoId }) => {
 
     const { addGecko } = useContext(GeckoContext)
 
@@ -25,9 +25,11 @@ export default () => {
                 profile: geckoProfile.current.value
             }
             addGecko(newGeckoObj)
-                .then(
-                    console.log('success!')
-                )
+                .then(newGeckoId => {
+                        toggle()
+                        setMorphGeckoId(newGeckoId)
+                        morphToggle(newGeckoId)
+                })
         } else {
             window.alert("Please give your gecko a name!")
         }

@@ -19,7 +19,11 @@ export const GeckoProvider = (props) => {
             },
             body: JSON.stringify(gecko)
         })
-            .then(getGeckos)
+            .then(_ => _.json())
+            .then(gecko => {
+                getGeckos()
+                return gecko.id
+             })
     }
 
     const deleteGecko = geckoId => {
