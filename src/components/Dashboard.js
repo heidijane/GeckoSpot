@@ -3,28 +3,36 @@
     Determines which part of the app is shown to the user
 
     Possible page states:
-    - geckoList
-    - geckoDetails
-    - marketplace
+    - myGeckos: "home" page once a user is logged in, shows an overview of all their geckos
+    - geckoDetails: detailed information page on one gecko
+    - marketplace: area where users can see list of geckos for sale
 */
 
 import React, { useState, useEffect } from "react"
-import GeckoList from "./geckos/GeckoList"
+import MyGeckos from "./geckos/MyGeckos"
+import Marketplace from "./marketplace/Marketplace"
+import NavBar from "./nav/NavBar"
 
-export default ({toggle}) => {
-    const [pageState, setPageState] = useState("geckoList")
+export default () => {
+    const [pageState, setPageState] = useState("myGeckos")
     const [components, setComponents] = useState()
 
-    const showGeckoList = () => <GeckoList />
+    const showMyGeckos = () => <MyGeckos />
+    const showMarketplace = () => <Marketplace />
 
     useEffect(() => {
-        if (pageState === "geckoList") {
-            setComponents(showGeckoList)
+        if (pageState === "myGeckos") {
+            setComponents(showMyGeckos)
+        } else if (pageState === "marketplace") {
+            setComponents(showMarketplace)
         }
     }, [pageState])
 
     return (
-        <div>{components}</div>
+        <>
+            <NavBar setPageState={setPageState} />
+            <div>{components}</div>
+        </>
         )
 }
 
