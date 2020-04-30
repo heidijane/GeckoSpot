@@ -12,8 +12,9 @@ import React, { useState, useEffect } from "react"
 import MyGeckos from "./geckos/MyGeckos"
 import Marketplace from "./marketplace/Marketplace"
 import NavBar from "./nav/NavBar"
+import { DataStore } from "./DataStore"
 
-export default () => {
+export default ({logout}) => {
     const [pageState, setPageState] = useState("myGeckos")
     const [components, setComponents] = useState()
 
@@ -30,8 +31,8 @@ export default () => {
 
     return (
         <>
-            <NavBar setPageState={setPageState} />
-            <div>{components}</div>
+            <NavBar setPageState={setPageState} logout={logout} />
+            <DataStore>{components}</DataStore>
         </>
         )
 }

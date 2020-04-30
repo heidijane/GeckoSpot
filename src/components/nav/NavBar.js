@@ -2,7 +2,7 @@ import React from "react"
 import { NavbarBrand, NavItem, NavLink, Nav } from "reactstrap"
 import "./NavBar.css"
 
-export default ({ setPageState} ) => {
+export default ({ setPageState, logout } ) => {
     return (
             <Nav id="navigation">
                 <NavbarBrand>GeckoSpot</NavbarBrand>
@@ -11,6 +11,9 @@ export default ({ setPageState} ) => {
                 </NavItem>
                 <NavItem>
                     <NavLink onClick={() => { setPageState("marketplace")}}>Marketplace</NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink onClick={logout}>Logout</NavLink>
                 </NavItem>
             </Nav>
     )
