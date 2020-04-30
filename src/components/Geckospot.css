@@ -44,15 +44,3 @@ body {
 .fakeLink:focus {
     outline: 0;
 }
-
-.align-left {
-    text-align: left;
-}
-
-.align-right {
-    text-align: right;
-}
-
-.align-center {
-    text-align: center;
-}

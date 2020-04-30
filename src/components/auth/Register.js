@@ -85,7 +85,7 @@ export const Register = (props) => {
                             placeholder="Verify password"
                             required />
                     </FormGroup>
-                    <FormGroup className="align-right">
+                    <FormGroup className="text-right">
                         <Button onClick={() => props.setState("login")}>
                             Back
                         </Button>

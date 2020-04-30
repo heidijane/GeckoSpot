@@ -57,7 +57,7 @@ export const Login = (props) => {
                         placeholder="Password"
                         required />
                 </FormGroup>
-                <FormGroup className="align-right">
+                <FormGroup className="text-right">
                     <Button type="submit" color="primary">
                         Sign in
                     </Button>

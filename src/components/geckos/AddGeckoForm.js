@@ -1,13 +1,39 @@
-import React, { useRef } from "react"
-import { Form, FormGroup, FormText, Input, Label, Col, Row, Button } from "reactstrap"
+import React, { useRef, useContext } from "react"
+import { Form, FormGroup, FormText, Input, Label, Button } from "reactstrap"
+import DatePicker from "reactstrap-date-picker"
 import "./AddGeckoForm.css"
+import { GeckoContext } from "./GeckoProvider"
 
 export default () => {
+
+    const { addGecko } = useContext(GeckoContext)
+
     const geckoName = useRef()
-    const geckoSex = useRef() 
+    const geckoSex = useRef()
+    const hatchDate = useRef()
+    const geckoProfile = useRef()
+
+    const createGecko = () => {
+
+        //make sure user has given their gecko a name, if so go ahead and add it
+        if (geckoName.current.value) {
+            const newGeckoObj = {
+                userId: parseInt(sessionStorage.getItem("activeUser")),
+                name: geckoName.current.value,
+                sex: parseInt(geckoSex.current.value),
+                hatchDate: hatchDate.current.state.value,
+                profile: geckoProfile.current.value
+            }
+            addGecko(newGeckoObj)
+                .then(
+                    console.log('success!')
+                )
+        } else {
+            window.alert("Please give your gecko a name!")
+        }
+    }
 
     return (
-        <>
         <Form>
             <FormGroup>
                 <Label for="geckoForm__name">Gecko Name</Label>
@@ -31,8 +57,45 @@ export default () => {
                     <option value="0">Female</option>
                     <option value="1">Male</option>
                 </Input>
-            </FormGroup>    
+            </FormGroup>
+            <FormGroup>
+                <Label for="geckoForm__hatchDate">Hatch Date</Label>
+                <DatePicker
+                    ref={hatchDate}
+                    id="geckoForm__hatchDate"
+                    name="hatchDate"
+                    clearButtonElement="Clear"
+                />
+                <FormText color="muted">
+                If you do not know your gecko's exact hatch date you can give an estimate based upon your gecko's age. 
+                If the age of your gecko is unknown it's fine to leave this blank!
+                </FormText>
+            </FormGroup> 
+            <FormGroup>
+                <Label for="geckoForm__profile">Profile <span className="font-italic">(optional)</span></Label>
+                <Input
+                    innerRef={geckoProfile}
+                    type="textarea"
+                    id="geckoForm__profile"
+                    name="geckoProfile"
+                    placeholder="My gecko is the coolest."
+                />
+                <FormText color="muted">
+                Let everyone know what makes your gecko unique!
+                </FormText>
+            </FormGroup>
+            <FormGroup className="text-right">
+                <Button 
+                type="submit"
+                color="primary"
+                onClick={
+                    evt => {
+                        evt.preventDefault() // Prevent browser from submitting the form
+                        createGecko()
+                    }
+                }
+                >Add New Gecko</Button>    
+            </FormGroup>
         </Form>
-       </>
     )
 }
