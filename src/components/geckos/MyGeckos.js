@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap"
+import AddGeckoForm from "./AddGeckoForm"
 
 export default () => {
 
@@ -16,7 +17,9 @@ export default () => {
                 <ModalHeader toggle={addGeckoToggle}>
                     Add New Gecko
                 </ModalHeader>
-                <ModalBody>form here</ModalBody>
+                <ModalBody>
+                    <AddGeckoForm />
+                </ModalBody>
             </Modal>
         </>
     )
