@@ -1,7 +1,33 @@
+@font-face {
+    font-family: "Karla";
+    src: url("../fonts/Karla-Regular.ttf");
+}
+@font-face {
+    font-family: "Karla";
+    src: url("../fonts/Karla-Italic.ttf");
+    font-style: italic;
+}
+@font-face {
+    font-family: "Karla";
+    src: url("../fonts/Karla-Bold.ttf");
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Karla";
+    src: url("../fonts/Karla-BoldItalic.ttf");
+    font-weight: bold;
+    font-style: italic;
+}
+
+body {
+    background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("./images/gecko_background.png");
+    background-size: 40%;
+    font-family: Karla, sans-serif;
+}
+
 .fakeLink {
     background: none!important;
     border: none;
-    font-family: arial, sans-serif;
     text-decoration: none;
     cursor: pointer;
 }
@@ -17,4 +43,16 @@
 
 .fakeLink:focus {
     outline: 0;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-center {
+    text-align: center;
 }

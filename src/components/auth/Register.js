@@ -1,5 +1,5 @@
 import React, { useRef } from "react"
-
+import { Form, FormGroup, Input, Button, Card, CardBody, CardHeader } from "reactstrap"
 
 export const Register = (props) => {
     const username = useRef()
@@ -53,53 +53,49 @@ export const Register = (props) => {
     }
 
     return (
-        <div className="container--login">
-            <form className="form--register" onSubmit={handleRegister}>
-                <h4 className="darkgray">If you are not a customer yet, please register a new account</h4>
-                <fieldset>
-                    <label htmlFor="username"> Username </label>
-                    <input ref={username} type="text"
-                        name="username"
-                        className="form-control"
-                        placeholder="username"
-                        required  />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputEmail"> Email address </label>
-                    <input ref={email} type="email"
-                        name="email"
-                        className="form-control"
-                        placeholder="Email address"
-                        required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputPassword"> Password </label>
-                    <input ref={password} type="password"
-                        name="password"
-                        className="form-control"
-                        placeholder="Password"
-                        required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="verifyPassword"> Verify Password </label>
-                    <input ref={verifyPassword} type="password"
-                        name="verifyPassword"
-                        className="form-control"
-                        placeholder="Verify password"
-                        required />
-                </fieldset>
-                <fieldset>
-                    <button onClick={() => props.setState("login")}>
-                        Back
-                    </button>
-                </fieldset>
-                <fieldset>
-                    <button type="submit">
-                        Register
-                    </button>
-                </fieldset>
-            </form>
-        </div>
+        <Card className="authForm">
+            <CardHeader><h4>Register</h4></CardHeader>
+            <CardBody>
+                <Form onSubmit={handleRegister}>
+                    <FormGroup>
+                        <label htmlFor="username"> Username </label>
+                        <Input innerRef={username} type="text"
+                            name="username"
+                            placeholder="username"
+                            required  />
+                    </FormGroup>
+                    <FormGroup>
+                        <label htmlFor="inputEmail"> Email address </label>
+                        <Input innerRef={email} type="email"
+                            name="email"
+                            placeholder="Email address"
+                            required />
+                    </FormGroup>
+                    <FormGroup>
+                        <label htmlFor="inputPassword"> Password </label>
+                        <Input innerRef={password} type="password"
+                            name="password"
+                            placeholder="Password"
+                            required />
+                    </FormGroup>
+                    <FormGroup>
+                        <label htmlFor="verifyPassword"> Verify Password </label>
+                        <Input innerRef={verifyPassword} type="password"
+                            name="verifyPassword"
+                            placeholder="Verify password"
+                            required />
+                    </FormGroup>
+                    <FormGroup className="align-right">
+                        <Button onClick={() => props.setState("login")}>
+                            Back
+                        </Button>
+                        <Button type="submit" color="primary">
+                            Register
+                        </Button>
+                    </FormGroup>
+                </Form>
+            </CardBody>
+        </Card>
     )
 }
 

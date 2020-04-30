@@ -1,5 +1,5 @@
 import React, { useRef } from "react"
-
+import { Form, FormGroup, Input, Button, Card, CardBody, CardHeader } from "reactstrap"
 
 export const Login = (props) => {
     const username = useRef()
@@ -27,40 +27,46 @@ export const Login = (props) => {
                 } else if (exists && exists.password !== password.current.value) {
                     window.alert("Password does not match")
                 } else if (!exists) {
+                    console.log(exists)
                     window.alert("User account does not exist")
                 }
             })
     }
 
     return (
-        <div className="container--login">
-            <form className="form--login" onSubmit={handleLogin}>
-                <h2>Please sign in</h2>
-                <fieldset>
-                    <label htmlFor="username"> Username </label>
-                    <input ref={username} type="text"
-                        id="username"
-                        className="form-control"
+        <Card className="authForm">
+            <CardHeader><h4>Please sign in</h4></CardHeader>
+            <CardBody>
+            <Form onSubmit={handleLogin}>
+                <FormGroup>
+                    <label htmlFor="login__username">Username</label>
+                    <Input 
+                        innerRef={username}
+                        type="text"
+                        name="login__username"
                         placeholder="Username"
-                        required autoFocus />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputPassword"> Password </label>
-                    <input ref={password} type="password"
-                        id="password"
-                        className="form-control"
+                        required
+                        autoFocus />
+                </FormGroup>
+                <FormGroup>
+                    <label htmlFor="login__password">Password</label>
+                    <Input 
+                        innerRef={password} 
+                        type="password"
+                        name="login__password"
                         placeholder="Password"
                         required />
-                </fieldset>
-                <fieldset>
-                    <button type="submit">
+                </FormGroup>
+                <FormGroup className="align-right">
+                    <Button type="submit" color="primary">
                         Sign in
-                    </button>
-                </fieldset>
-            </form>
+                    </Button>
+                </FormGroup>
+            </Form>
             <hr />
             <div className="fakeLink href" onClick={() => props.setState("register")}>Or click here to register.</div>
-        </div>
+            </CardBody>
+        </Card>
     )
 }
 

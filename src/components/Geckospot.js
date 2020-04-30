@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Dashboard from "./Dashboard"
-import { Auth } from "./auth/Auth"
+import { Welcome } from "./welcome/Welcome"
 import "./Geckospot.css"
 
 export default () => {
@@ -8,6 +8,6 @@ export default () => {
     const toggle = () => update(!check)
 
     return (
-        sessionStorage.getItem("activeUser") ? <Dashboard /> : <Auth toggle={toggle} />
+        sessionStorage.getItem("activeUser") ? <Dashboard /> : <Welcome toggle={toggle} />
     )
 }
