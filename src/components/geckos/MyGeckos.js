@@ -4,7 +4,7 @@ import AddGeckoForm from "./AddGeckoForm"
 import AddMorph from "./AddMorph"
 import GeckoList from "./GeckoList"
 
-export default () => {
+export default ({ setPageState, setGeckoDetailsId }) => {
 
     const [addGeckoModal, setAddGeckoModal] = useState(false)
     const addGeckoToggle = () => setAddGeckoModal(!addGeckoModal)
@@ -17,7 +17,7 @@ export default () => {
     return (
         <>
             <Button onClick={addGeckoToggle}>Add Gecko</Button>
-            <GeckoList />
+            <GeckoList setPageState={setPageState} setGeckoDetailsId={setGeckoDetailsId} />
             <Modal isOpen={addGeckoModal} toggle={addGeckoToggle} backdrop={"static"}>
                 <ModalHeader toggle={addGeckoToggle}>
                     Add New Gecko

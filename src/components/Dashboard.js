@@ -13,19 +13,25 @@ import MyGeckos from "./geckos/MyGeckos"
 import Marketplace from "./marketplace/Marketplace"
 import NavBar from "./nav/NavBar"
 import { DataStore } from "./DataStore"
+import GeckoDetails from "./geckos/GeckoDetails"
 
 export default ({logout}) => {
     const [pageState, setPageState] = useState("myGeckos")
     const [components, setComponents] = useState()
 
-    const showMyGeckos = () => <MyGeckos />
+    const [geckoDetailsId, setGeckoDetailsId] = useState()
+
+    const showMyGeckos = () => <MyGeckos setPageState={setPageState} setGeckoDetailsId={setGeckoDetailsId} />
     const showMarketplace = () => <Marketplace />
+    const showGeckoDetails = () => <GeckoDetails geckoId={geckoDetailsId} />
 
     useEffect(() => {
         if (pageState === "myGeckos") {
             setComponents(showMyGeckos)
         } else if (pageState === "marketplace") {
             setComponents(showMarketplace)
+        } else if (pageState === "geckoDetails") {
+            setComponents(showGeckoDetails)
         }
     }, [pageState])
 
