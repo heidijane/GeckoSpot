@@ -1,0 +1,28 @@
+.geckoList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-color: rgba(255, 253, 248, 0.8);
+    padding: 1em;
+    margin: 1em;
+}
+
+.geckoCard {
+    flex-basis: 25%;
+    min-width: 250px;
+    max-width: 300px;
+    margin-bottom: 1em;
+}
+
+.geckoCard__title {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+@media only screen and (max-width: 580px) {
+    .geckoCard {
+        flex-basis: 100%;
+        min-width: auto;
+        max-width: none;
+    }
+  }
