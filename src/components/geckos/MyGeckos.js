@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap"
 import AddGeckoForm from "./AddGeckoForm"
 import AddMorph from "./AddMorph"
+import GeckoList from "./GeckoList"
 
 export default () => {
 
@@ -16,7 +17,8 @@ export default () => {
     return (
         <>
             <Button onClick={addGeckoToggle}>Add Gecko</Button>
-            <Modal isOpen={addGeckoModal} toggle={addGeckoToggle} backdrop={"static"} keyboard={false}>
+            <GeckoList />
+            <Modal isOpen={addGeckoModal} toggle={addGeckoToggle} backdrop={"static"}>
                 <ModalHeader toggle={addGeckoToggle}>
                     Add New Gecko
                 </ModalHeader>
@@ -24,12 +26,12 @@ export default () => {
                     <AddGeckoForm toggle={addGeckoToggle} morphToggle={morphToggle} setMorphGeckoId={setMorphGeckoId} />
                 </ModalBody>
             </Modal>
-            <Modal isOpen={morphModal} toggle={morphToggle} backdrop={"static"} keyboard={false}>
+            <Modal isOpen={morphModal} toggle={morphToggle} backdrop={"static"}>
                 <ModalHeader toggle={morphToggle}>
                     Gecko Morph Info
                 </ModalHeader>
                 <ModalBody>
-                    <AddMorph geckoId={morphGeckoId} />
+                    <AddMorph toggle={morphToggle} geckoId={morphGeckoId} />
                 </ModalBody>
             </Modal>
         </>

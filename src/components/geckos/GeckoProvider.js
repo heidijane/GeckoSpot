@@ -6,7 +6,7 @@ export const GeckoProvider = (props) => {
     const [geckos, setGeckos] = useState([])
 
     const getGeckos = () => {
-        return fetch("http://localhost:8088/geckos")
+        return fetch("http://localhost:8088/geckos?_embed=geckoMorphs")
             .then(res => res.json())
             .then(setGeckos)
     }
@@ -33,6 +33,17 @@ export const GeckoProvider = (props) => {
             .then(getGeckos)
     }
 
+    const addMorph = morph => {
+        return fetch("http://localhost:8088/geckoMorphs", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(morph)
+        })
+            .then(getGeckos)
+    }
+
     useEffect(() => {
         getGeckos()
     }, [])
@@ -43,7 +54,7 @@ export const GeckoProvider = (props) => {
 
     return (
         <GeckoContext.Provider value={{
-            geckos, addGecko, deleteGecko
+            geckos, addGecko, deleteGecko, addMorph
         }}>
             {props.children}
         </GeckoContext.Provider>
