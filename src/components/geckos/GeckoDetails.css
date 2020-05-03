@@ -20,3 +20,41 @@
 .featuredImage {
     width:100%;
 }
+
+.geckoDetails__hatchDateAndSex {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    font-size: 1.1em;
+    vertical-align: middle;
+    height: 44px;
+}
+
+.geckoDetails__hatchDate {
+    background-color: #f0f3e6;
+    padding: .3em .6em .3em .2em;
+    border: 1px solid #dcdfd0;
+    width: 100%;
+    margin-right: 5px;
+    border-radius: 2px;
+    box-shadow: 0px 3px 13px 1px rgba(0,0,0,0.02);
+}
+
+.geckoDetails__hatchDate img {
+    height: 32px;
+    margin-right: .2em;
+    position: relative;
+    top: -1px;
+}
+
+.geckoDetails__sex {
+    background-color: #f0f3e6;
+    padding: .3em .7em .3em .7em;
+    border: 1px solid #dcdfd0;
+    border-radius: 2px;
+    box-shadow: 0px 3px 13px 1px rgba(0,0,0,0.02);
+}
+
+.geckoDetails__sex img {
+    height: 20px;
+}
