@@ -13,17 +13,24 @@ export default ({ toggle, morphToggle, setMorphGeckoId }) => {
     const hatchDate = useRef()
     const geckoProfile = useRef()
 
+    const convertToTimestamp = (string) => {
+        return (Date.parse(string)/1000)
+    }
+
     const createGecko = () => {
 
         //make sure user has given their gecko a name, if so go ahead and add it
         if (geckoName.current.value) {
+
+            //convert string date into timestamp
             const newGeckoObj = {
                 userId: parseInt(sessionStorage.getItem("activeUser")),
                 name: geckoName.current.value,
                 sex: parseInt(geckoSex.current.value),
-                hatchDate: hatchDate.current.state.value,
+                hatchDate: convertToTimestamp(hatchDate.current.state.value),
                 profile: geckoProfile.current.value
             }
+            console.log(newGeckoObj)
             addGecko(newGeckoObj)
                 .then(newGeckoId => {
                         toggle()
