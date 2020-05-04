@@ -24,14 +24,14 @@ export default ({ geckoId, toggleState, toggle, mealObjectToEdit, setMealObjectT
 
     //array containing the default feeder insects
     const feeders = [
-        "Mealworms",
-        "Crickets",
-        "Dubia Roaches",
-        "Superworm",
-        "Phoenix Worms",
-        "Waxworms",
-        "Silkworms",
-        "Hornworms"
+        "mealworm",
+        "cricket",
+        "dubia roach",
+        "superworm",
+        "phoenix worm",
+        "waxworm",
+        "silkworm",
+        "hornworm"
     ]
 
     //set states for the checkboxes
@@ -158,18 +158,19 @@ export default ({ geckoId, toggleState, toggle, mealObjectToEdit, setMealObjectT
                                 <Label for="mealForm__mealType">Feeder</Label>
                                 <Input
                                     innerRef={mealType}
-                                    type="select"
+                                    type="text"
                                     name="mealType"
                                     id="mealForm__mealType"
                                     defaultValue={mealObjectToEdit.mealType}
-                                >
-                                    <option key={"feeder_default"} value="0">Please select...</option>
+                                    list="feederList"
+                                />
+                                    <datalist id="feederList">
                                     {
                                         feeders.map((feeder, key) => {
                                             return <option key={"feeder_"+key}>{feeder}</option>
                                         })
                                     }
-                                </Input>
+                                    </datalist>
                                 </FormGroup>
                             </Col>
                             <Col md={2}>
