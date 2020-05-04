@@ -10,20 +10,8 @@ export default ({ geckoId, addMealModalToggle, setMealObjectToEdit }) => {
 
     geckoMeals.sort((a, b) => (a.mealDate > b.mealDate) ? 1 : -1)
 
-    return (
-        <Card>
-            <CardHeader>
-                Meal Log
-                <Button 
-                    color="primary"
-                    className="btn-sm"
-                    onClick={addMealModalToggle}
-                    >
-                        Add New Meal
-                </Button>
-            </CardHeader>
-            <CardBody>
-                <Table>
+    const mealTable = (
+        <Table>
                     <thead>
                         <tr>
                             <td>Date</td>
@@ -66,6 +54,22 @@ export default ({ geckoId, addMealModalToggle, setMealObjectToEdit }) => {
                 })}
                 </tbody>
                 </Table>
+    )
+
+    return (
+        <Card>
+            <CardHeader>
+                Meal Log
+                <Button 
+                    color="primary"
+                    className="btn-sm"
+                    onClick={addMealModalToggle}
+                    >
+                        Add New Meal
+                </Button>
+            </CardHeader>
+            <CardBody>
+                {geckoMeals.length > 0 ? mealTable : "You have not logged any meals for this gecko yet."}
             </CardBody>
         </Card>
     )
