@@ -1,3 +1,8 @@
+/*
+    AddMealModal.js
+    This page allows a user to add or edit a gecko meal log
+*/
+
 import React, { useContext, useRef, useState, useEffect } from "react"
 import { Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Row, Col, Button } from "reactstrap"
 import DatePicker from "reactstrap-date-picker"
@@ -67,12 +72,16 @@ export default ({ geckoId, toggleState, toggle, mealObjectToEdit, setMealObjectT
         return (Date.parse(string)/1000)
     }
 
+    //get the current date for use as the default value
     const currentDate = new Date();
     let defaultDate = currentDate.toISOString()
+
+    //if the user is editing a log use that value as the default date
     if (mealObjectToEdit.mealDate !== undefined) {
         defaultDate = new Date(mealObjectToEdit.mealDate*1000).toISOString()
     }
 
+    //function that is called when the submit button is clicked, it can add or edit a log
     const createMeal = () => {
 
         const parsedGeckoToBeFed = parseInt(geckoToBeFed.current.value)
@@ -122,7 +131,7 @@ export default ({ geckoId, toggleState, toggle, mealObjectToEdit, setMealObjectT
     return (
         <Modal isOpen={toggleState} toggle={toggle} onClosed={resetMealModal}>
                 <ModalHeader toggle={toggle}>
-                    Log a Meal
+                    {mealObjectToEdit.id !== null ? "Edit Meal Log" : "Log a Meal"}
                 </ModalHeader>
                 <ModalBody>
                     <Form>
@@ -235,7 +244,9 @@ export default ({ geckoId, toggleState, toggle, mealObjectToEdit, setMealObjectT
                                 createMeal()
                             }
                         }
-                        >Save Meal</Button>   
+                    >
+                        {mealObjectToEdit.id !== null ? "Update Meal" : "Save Meal"}
+                        </Button>   
                         <Button
                         onClick={toggle}
                         >Cancel</Button>   
