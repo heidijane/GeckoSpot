@@ -8,6 +8,8 @@ export default ({ geckoId, addMealModalToggle, setMealObjectToEdit }) => {
     const { meals, deleteMeal } = useContext(MealContext)
     const geckoMeals = meals.filter(meal => meal.geckoId === geckoId)
 
+    geckoMeals.sort((a, b) => (a.mealDate > b.mealDate) ? 1 : -1)
+
     return (
         <Card>
             <CardHeader>
