@@ -6,11 +6,13 @@ import MealLog from "../meals/MealLog"
 import AddMealModal from "../meals/AddMealModal"
 import { timestampToDateString } from "../../utilities/timestampToString"
 
-export default ( {geckoId} ) => {
+export default ( props ) => {
 
     const { geckos } = useContext(GeckoContext)
 
     const currentUserId = parseInt(sessionStorage.getItem("activeUser"))
+
+    const geckoId = props.geckoId
 
     const currentGecko = geckos.find(gecko => gecko.id === geckoId)
     let currentGeckoMorph = currentGecko.geckoMorphs[0]
@@ -24,6 +26,9 @@ export default ( {geckoId} ) => {
 
     const [addMealModal, setAddMealModal] = useState(false)
     const addMealModalToggle = () => setAddMealModal(!addMealModal)
+
+    //create state for the add meal modal for a meal object you want to edit
+    const [mealObjectToEdit, setMealObjectToEdit] = useState({id: null})
 
     return (
     <>
@@ -42,9 +47,9 @@ export default ( {geckoId} ) => {
                 <div className="text-right"><Button className="btn-sm">Change Info</Button></div>
             </section>
             <section className="geckoDetails__rightColumn">
-                <MealLog geckoId={geckoId} addMealModalToggle={addMealModalToggle} />
+                <MealLog geckoId={geckoId} addMealModalToggle={addMealModalToggle} setMealObjectToEdit={setMealObjectToEdit} />
             </section>
         </article>
-        <AddMealModal geckoId={geckoId} toggleState={addMealModal} toggle={addMealModalToggle} />
+        <AddMealModal geckoId={geckoId} toggleState={addMealModal} toggle={addMealModalToggle} mealObjectToEdit={mealObjectToEdit} setMealObjectToEdit={setMealObjectToEdit} />
     </>)
 }

@@ -3,7 +3,7 @@ import { Card, CardHeader, CardBody, Button, Table } from "reactstrap"
 import { MealContext } from "./MealProvider"
 import { timestampToDateString } from "../../utilities/timestampToString"
 
-export default ({ geckoId, addMealModalToggle }) => {
+export default ({ geckoId, addMealModalToggle, setMealObjectToEdit }) => {
 
     const { meals, deleteMeal } = useContext(MealContext)
     const geckoMeals = meals.filter(meal => meal.geckoId === geckoId)
@@ -15,7 +15,8 @@ export default ({ geckoId, addMealModalToggle }) => {
                 <Button 
                     color="primary"
                     className="btn-sm"
-                    onClick={addMealModalToggle}>
+                    onClick={addMealModalToggle}
+                    >
                         Add New Meal
                 </Button>
             </CardHeader>
@@ -32,9 +33,10 @@ export default ({ geckoId, addMealModalToggle }) => {
                             <td></td>
                         </tr>
                     </thead>
+                    <tbody>
                 {geckoMeals.map(meal => {
                     return (
-                        <tbody key={"mealtbody"+meal.id}>
+                        
                             <tr key={"mealrow"+meal.id}>
                                 <td>{timestampToDateString(meal.mealDate)}</td>
                                 <td>{meal.mealType}</td>
@@ -43,16 +45,24 @@ export default ({ geckoId, addMealModalToggle }) => {
                                 <td>{meal.d3Supplement === true ? "✔" : ""}</td>
                                 <td>{meal.multivitaminSupplement === true ? "✔" : ""}</td>
                                 <td>
-                                    <Button className="btn-sm">edit</Button>
+                                    <Button
+                                    className="btn-sm"
+                                    onClick={() => {
+                                        setMealObjectToEdit(meal)
+                                        addMealModalToggle()
+                                        }
+                                    }
+                                    >edit</Button>
                                     <Button 
                                         className="btn-sm"
                                         onClick={() => deleteMeal(meal.id)}
                                     >delete</Button>
                                 </td>
                             </tr>
-                        </tbody>
+                        
                     )
                 })}
+                </tbody>
                 </Table>
             </CardBody>
         </Card>

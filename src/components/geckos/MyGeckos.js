@@ -3,6 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody } from "reactstrap"
 import AddGeckoForm from "./AddGeckoForm"
 import AddMorph from "./AddMorph"
 import GeckoList from "./GeckoList"
+import AddMealModal from "../meals/AddMealModal"
 
 export default ({ setPageState, setGeckoDetailsId }) => {
 
@@ -14,9 +15,14 @@ export default ({ setPageState, setGeckoDetailsId }) => {
 
     const [morphGeckoId, setMorphGeckoId] = useState()
 
+    //state for the log a meal modal
+    const [addMealModal, setAddMealModal] = useState(false)
+    const addMealModalToggle = () => setAddMealModal(!addMealModal)
+
     return (
         <>
             <Button onClick={addGeckoToggle}>Add Gecko</Button>
+            <Button onClick={addMealModalToggle}>Log a Meal</Button>
             <GeckoList setPageState={setPageState} setGeckoDetailsId={setGeckoDetailsId} />
             <Modal isOpen={addGeckoModal} toggle={addGeckoToggle} backdrop={"static"}>
                 <ModalHeader toggle={addGeckoToggle}>
@@ -34,6 +40,7 @@ export default ({ setPageState, setGeckoDetailsId }) => {
                     <AddMorph toggle={morphToggle} geckoId={morphGeckoId} />
                 </ModalBody>
             </Modal>
+            <AddMealModal geckoId={null} toggleState={addMealModal} toggle={addMealModalToggle} mealObjectToEdit={{id:null}} />
         </>
     )
 }

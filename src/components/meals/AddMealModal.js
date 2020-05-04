@@ -1,13 +1,13 @@
-import React, { useContext, useRef, useState } from "react"
+import React, { useContext, useRef, useState, useEffect } from "react"
 import { Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Row, Col, Button } from "reactstrap"
 import DatePicker from "reactstrap-date-picker"
 import { GeckoContext } from "../geckos/GeckoProvider"
 import { MealContext } from "./MealProvider"
 
-export default ({ geckoId, toggleState, toggle }) => {
+export default ({ geckoId, toggleState, toggle, mealObjectToEdit, setMealObjectToEdit }) => {
 
     const { geckos } = useContext(GeckoContext)
-    const { addMeal } = useContext(MealContext)
+    const { addMeal, updateMeal } = useContext(MealContext)
     const currentUserId = parseInt(sessionStorage.getItem("activeUser"))
 
     const currentUserGeckos = geckos.filter(gecko => gecko.userId === currentUserId)
@@ -39,19 +39,36 @@ export default ({ geckoId, toggleState, toggle }) => {
     const [multivitaminChecked, setMultivitaminChecked] = useState(false)
     const multivitaminCheckboxClicked = () => setMultivitaminChecked(!multivitaminChecked)
 
-    //function to run when the modal is closed to reset the checkobx states
-    const resetCheckboxes = () => {
+    //every time the mealObjectToEdit is changed update the checkboxes' default values
+    useEffect(() => {
+        if (mealObjectToEdit.calciumSupplement === true) {
+            setCalciumChecked(true)
+        }
+        if (mealObjectToEdit.d3Supplement === true) {
+            setd3Checked(true)
+        }
+        if (mealObjectToEdit.multivitaminSupplement === true) {
+            setMultivitaminChecked(true)
+        }
+    }, [mealObjectToEdit])
+
+    //function to run when the modal is closed to reset the checkobx states and clear out the edit object
+    const resetMealModal = () => {
         setCalciumChecked(false)
         setd3Checked(false)
         setMultivitaminChecked(false)
+        setMealObjectToEdit({id:null})
     }
 
     const convertToTimestamp = (string) => {
         return (Date.parse(string)/1000)
     }
 
-
     const currentDate = new Date();
+    let defaultDate = currentDate.toISOString()
+    if (mealObjectToEdit.mealDate !== undefined) {
+        defaultDate = new Date(mealObjectToEdit.mealDate*1000).toISOString()
+    }
 
     const createMeal = () => {
 
@@ -77,7 +94,7 @@ export default ({ geckoId, toggleState, toggle }) => {
         }
 
         if (errorTrigger === false) {
-            const newMealObj = {
+            const mealObj = {
                 geckoId: parsedGeckoToBeFed,
                 mealType: mealType.current.value,
                 quantity: parsedQuantity,
@@ -87,13 +104,20 @@ export default ({ geckoId, toggleState, toggle }) => {
                 mealDate: mealDateTimestamp
             }
 
-            addMeal(newMealObj)
+            //if there is a mealObject that is being edited update the row, otherwise add a new one
+            if (mealObjectToEdit.id === null) {
+                addMeal(mealObj)
+                    .then(toggle)
+            } else {
+                mealObj.id = mealObjectToEdit.id
+                updateMeal(mealObj)
                 .then(toggle)
+            }
         }
     }
 
     return (
-        <Modal isOpen={toggleState} toggle={toggle} onClosed={resetCheckboxes}>
+        <Modal isOpen={toggleState} toggle={toggle} onClosed={resetMealModal}>
                 <ModalHeader toggle={toggle}>
                     Log a Meal
                 </ModalHeader>
@@ -125,6 +149,7 @@ export default ({ geckoId, toggleState, toggle }) => {
                                     type="select"
                                     name="mealType"
                                     id="mealForm__mealType"
+                                    defaultValue={mealObjectToEdit.mealType}
                                 >
                                     <option key={"feeder_default"} value="0">Please select...</option>
                                     {
@@ -145,6 +170,7 @@ export default ({ geckoId, toggleState, toggle }) => {
                                         id="mealForm__quantity"
                                         min="1"
                                         defaultValue="1"
+                                        defaultValue={mealObjectToEdit.quantity !== undefined ? mealObjectToEdit.quantity : "1"}
                                     />
                                 </FormGroup>
                             </Col>
@@ -157,7 +183,8 @@ export default ({ geckoId, toggleState, toggle }) => {
                                     type="checkbox"
                                     name="supplements_calcium"
                                     id="mealForm__supplements--calcium"
-                                    onClick={calciumCheckboxClicked}
+                                    onChange={calciumCheckboxClicked}
+                                    checked={calciumChecked}
                                 />
                                 <Label check for="mealForm__supplements--calcium">Calcium</Label>
                             </FormGroup>
@@ -167,7 +194,8 @@ export default ({ geckoId, toggleState, toggle }) => {
                                 type="checkbox"
                                 name="supplements_d3"
                                 id="mealForm__supplements--d3"
-                                onClick={d3CheckboxClicked}
+                                onChange={d3CheckboxClicked}
+                                checked={d3Checked}
                             />
                             <Label check for="mealForm__supplements--d3">d3</Label>
                             </FormGroup>
@@ -177,7 +205,8 @@ export default ({ geckoId, toggleState, toggle }) => {
                                 type="checkbox"
                                 name="supplements_multivitamin"
                                 id="mealForm__supplements--multivitamin"
-                                onClick={multivitaminCheckboxClicked}
+                                onChange={multivitaminCheckboxClicked}
+                                checked={multivitaminChecked}
                             />
                             <Label check for="mealForm__supplements--multivitamin">Multivitamin</Label>
                             </FormGroup>
@@ -190,7 +219,7 @@ export default ({ geckoId, toggleState, toggle }) => {
                                 id="mealForm__mealDate"
                                 name="mealDate"
                                 clearButtonElement="Clear"
-                                value={currentDate.toISOString()}
+                                value={defaultDate}
                             />
                         </FormGroup>
                         <FormGroup className="text-right">

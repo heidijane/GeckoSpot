@@ -33,6 +33,17 @@ export const MealProvider = (props) => {
             .then(getMeals)
     }
 
+    const updateMeal = meal => {
+        return fetch(`http://localhost:8088/geckoMeals/${meal.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(meal)
+        })
+            .then(getMeals)
+    }
+
     useEffect(() => {
         getMeals()
     }, [])
@@ -43,7 +54,7 @@ export const MealProvider = (props) => {
 
     return (
         <MealContext.Provider value={{
-            meals, addMeal, deleteMeal
+            meals, addMeal, deleteMeal, updateMeal
         }}>
             {props.children}
         </MealContext.Provider>
