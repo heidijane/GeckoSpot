@@ -22,7 +22,7 @@ export default ({ setPageState, setGeckoDetailsId }) => {
                     //get most recent meal for current gecko
                     const filteredMeals = meals.filter(meal => meal.geckoId === gecko.id)
                     //sort meals by date
-                    filteredMeals.sort((a, b) => (a.mealDate > b.mealDate) ? 1 : (a.mealDate === b.mealDate) ? ((a.id > b.id) ? 1 : -1) : -1 )
+                    filteredMeals.sort((a, b) => (a.mealDate < b.mealDate) ? 1 : (a.mealDate === b.mealDate) ? ((a.id < b.id) ? 1 : -1) : -1 )
                     return (
                         <Card 
                             key={"gecko_"+gecko.id}
