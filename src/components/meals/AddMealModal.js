@@ -57,7 +57,10 @@ export default ({ geckoId, toggleState, toggle, mealObjectToEdit, setMealObjectT
         setCalciumChecked(false)
         setd3Checked(false)
         setMultivitaminChecked(false)
-        setMealObjectToEdit({id:null})
+        //if the modal is opening on a page where editing isn't an option, don't run this
+        if (typeof setMealObjectToEdit === "function") {
+            setMealObjectToEdit({id:null})
+        }
     }
 
     const convertToTimestamp = (string) => {
