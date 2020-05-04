@@ -73,7 +73,7 @@ export default ({ geckoId, toggleState, toggle }) => {
         //if user doesn't fill out the date set it to the current day
         let mealDateTimestamp = convertToTimestamp(currentDate)
         if (mealDate.current.state.value !== "") {
-            let mealDateTimestamp = convertToTimestamp(mealDate.current.state.value)
+            mealDateTimestamp = convertToTimestamp(mealDate.current.state.value)
         }
 
         if (errorTrigger === false) {

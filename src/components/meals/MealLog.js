@@ -5,7 +5,7 @@ import { timestampToDateString } from "../../utilities/timestampToString"
 
 export default ({ geckoId, addMealModalToggle }) => {
 
-    const { meals } = useContext(MealContext)
+    const { meals, deleteMeal } = useContext(MealContext)
     const geckoMeals = meals.filter(meal => meal.geckoId === geckoId)
 
     return (
@@ -42,7 +42,13 @@ export default ({ geckoId, addMealModalToggle }) => {
                                 <td>{meal.calciumSupplement === true ? "✔" : ""}</td>
                                 <td>{meal.d3Supplement === true ? "✔" : ""}</td>
                                 <td>{meal.multivitaminSupplement === true ? "✔" : ""}</td>
-                                <td><Button className="btn-sm">edit</Button><Button className="btn-sm">delete</Button></td>
+                                <td>
+                                    <Button className="btn-sm">edit</Button>
+                                    <Button 
+                                        className="btn-sm"
+                                        onClick={() => deleteMeal(meal.id)}
+                                    >delete</Button>
+                                </td>
                             </tr>
                         </tbody>
                     )
