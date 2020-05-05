@@ -8,20 +8,22 @@ import { timestampToDateString } from "../../utilities/timestampToString"
 
 export default ( props ) => {
 
-    const { geckos } = useContext(GeckoContext)
+    const { geckos, deleteGecko } = useContext(GeckoContext)
 
     const currentUserId = parseInt(sessionStorage.getItem("activeUser"))
 
     const geckoId = props.geckoId
 
     const currentGecko = geckos.find(gecko => gecko.id === geckoId)
-    let currentGeckoMorph = currentGecko.geckoMorphs[0]
-    if (currentGeckoMorph === undefined) {
+    let currentGeckoMorph = {}
+    if (currentGecko.geckoMorphs[0] === undefined) {
         currentGeckoMorph = {
             colorMorph: "",
             eyeMorph: "",
             sizeMorph: ""
         }
+    } else {
+        currentGeckoMorph = currentGecko.geckoMorphs[0]
     }
 
     const [addMealModal, setAddMealModal] = useState(false)
@@ -29,6 +31,12 @@ export default ( props ) => {
 
     //create state for the add meal modal for a meal object you want to edit
     const [mealObjectToEdit, setMealObjectToEdit] = useState({id: null})
+
+    //function that deletes gecko info from all tables
+    const removeGecko = () => {
+        deleteGecko(geckoId)
+            .then(props.setPageState("myGeckos"))
+    }
 
     return (
     <>
@@ -48,6 +56,17 @@ export default ( props ) => {
             </section>
             <section className="geckoDetails__rightColumn">
                 <MealLog geckoId={geckoId} addMealModalToggle={addMealModalToggle} setMealObjectToEdit={setMealObjectToEdit} />
+                <div className="text-right mt-2">
+                <Button
+                    color="danger"
+                    onClick={() => {
+                        if(window.confirm("Are you sure you want to delete this gecko?")) {
+                            removeGecko()
+                        }
+                    }
+                    }
+                >Delete Gecko</Button>
+            </div>
             </section>
         </article>
         <AddMealModal geckoId={geckoId} toggleState={addMealModal} toggle={addMealModalToggle} mealObjectToEdit={mealObjectToEdit} setMealObjectToEdit={setMealObjectToEdit} />

@@ -23,7 +23,7 @@ export default ({logout}) => {
 
     const showMyGeckos = () => <MyGeckos setPageState={setPageState} setGeckoDetailsId={setGeckoDetailsId} />
     const showMarketplace = () => <Marketplace />
-    const showGeckoDetails = () => <GeckoDetails geckoId={geckoDetailsId} />
+    const showGeckoDetails = () => <GeckoDetails setPageState={setPageState} geckoId={geckoDetailsId} />
 
     useEffect(() => {
         if (pageState === "myGeckos") {

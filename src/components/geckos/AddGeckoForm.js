@@ -30,7 +30,6 @@ export default ({ toggle, morphToggle, setMorphGeckoId }) => {
                 hatchDate: convertToTimestamp(hatchDate.current.state.value),
                 profile: geckoProfile.current.value
             }
-            console.log(newGeckoObj)
             addGecko(newGeckoObj)
                 .then(newGeckoId => {
                         toggle()

@@ -54,7 +54,7 @@ export const GeckoProvider = (props) => {
 
     return (
         <GeckoContext.Provider value={{
-            geckos, addGecko, deleteGecko, addMorph
+            geckos, addGecko, deleteGecko, addMorph,
         }}>
             {props.children}
         </GeckoContext.Provider>

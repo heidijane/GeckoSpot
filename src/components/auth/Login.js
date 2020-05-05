@@ -27,7 +27,6 @@ export const Login = (props) => {
                 } else if (exists && exists.password !== password.current.value) {
                     window.alert("Password does not match")
                 } else if (!exists) {
-                    console.log(exists)
                     window.alert("User account does not exist")
                 }
             })
