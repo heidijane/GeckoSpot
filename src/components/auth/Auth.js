@@ -8,7 +8,7 @@ export const Auth = ({toggle}) => {
     const [components, setComponents] = useState()
 
     const showLogin = () => <Login setState={setAuthPageState} toggle={toggle} />
-    const showRegister = () => <Register setState={setAuthPageState} toggle={toggle} />
+    const showRegister = () => <Register setState={setAuthPageState}  />
 
     useEffect(() => {
         if (authPageState === "login") {

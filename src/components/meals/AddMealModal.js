@@ -182,7 +182,6 @@ export default ({ geckoId, toggleState, toggle, mealObjectToEdit, setMealObjectT
                                         name="quantity"
                                         id="mealForm__quantity"
                                         min="1"
-                                        defaultValue="1"
                                         defaultValue={mealObjectToEdit.quantity !== undefined ? mealObjectToEdit.quantity : "1"}
                                     />
                                 </FormGroup>

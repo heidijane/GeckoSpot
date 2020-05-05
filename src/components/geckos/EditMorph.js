@@ -1,5 +1,5 @@
-import React, { useRef, useContext, useState } from "react"
-import { Form, FormGroup, FormText, Input, Label, Button } from "reactstrap"
+import React, { useRef, useContext } from "react"
+import { Form, FormGroup, Input, Label, Button } from "reactstrap"
 import "./AddGeckoForm.css"
 import { GeckoContext } from "./GeckoProvider"
   
@@ -8,22 +8,9 @@ export default ({ toggle, morphObjToEdit }) => {
 
     const { addMorph, updateMorph, deleteMorph } = useContext(GeckoContext)
 
-    const knowMorph = useRef()
     const colorMorph = useRef()
     const eyeMorph = useRef()
     const sizeMorph = useRef()
-
-    // const [formEnabled, setFormEnabled] = useState(true)
-    // const [formClass, setFormClass] = useState("disabled-form")
-    // const formToggler = () => {
-    //     if (knowMorph.current.value === "yes") {
-    //         setFormEnabled(false)
-    //         setFormClass("")
-    //     } else {
-    //         setFormEnabled(true)
-    //         setFormClass("disabled-form")
-    //     }         
-    // }
 
     const createMorph = () => {
         if (colorMorph.current.value === "" && eyeMorph.current.value === "" && sizeMorph.current.value === "") {

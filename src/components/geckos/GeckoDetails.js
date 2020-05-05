@@ -13,8 +13,6 @@ export default ( props ) => {
 
     const { geckos, deleteGecko } = useContext(GeckoContext)
 
-    const currentUserId = parseInt(sessionStorage.getItem("activeUser"))
-
     const geckoId = props.geckoId
 
     const currentGecko = geckos.find(gecko => gecko.id === geckoId)
@@ -55,7 +53,7 @@ export default ( props ) => {
     <>
         <article className="geckoDetails">
             <section className="geckoDetails__leftColumn">
-                <img src={require("../images/sample.gif")} className="featuredImage" />
+                <img src={require("../images/sample.gif")} className="featuredImage" alt="sample" />
                 <div><h1>{currentGecko.name}</h1></div>
                 <div className="geckoDetails__hatchDateAndSex">
                     <div className="geckoDetails__hatchDate"><img src={require("../images/icon_hatch.png")} alt="hatch date" title="hatch date" />{currentGecko.hatchDate !== null ? timestampToDateString(currentGecko.hatchDate) : "unknown"}</div>
