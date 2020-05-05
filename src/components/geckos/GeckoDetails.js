@@ -7,6 +7,7 @@ import AddMealModal from "../meals/AddMealModal"
 import { timestampToDateString } from "../../utilities/timestampToString"
 import EditGeckoForm from "./EditGeckoForm"
 import EditMorph from "./EditMorph"
+import UploadImage from "../images/UploadImage"
 
 
 export default ( props ) => {
@@ -127,7 +128,7 @@ export default ( props ) => {
                 Upload Image
             </ModalHeader>
             <ModalBody>
-               
+               <UploadImage />
             </ModalBody>
         </Modal>
     </>)

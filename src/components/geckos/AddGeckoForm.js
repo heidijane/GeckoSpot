@@ -28,7 +28,8 @@ export default ({ toggle, morphToggle, setMorphGeckoId }) => {
                 name: geckoName.current.value,
                 sex: parseInt(geckoSex.current.value),
                 hatchDate: convertToTimestamp(hatchDate.current.state.value),
-                profile: geckoProfile.current.value
+                profile: geckoProfile.current.value,
+                featuredImageId: null
             }
             addGecko(newGeckoObj)
                 .then(newGeckoId => {
