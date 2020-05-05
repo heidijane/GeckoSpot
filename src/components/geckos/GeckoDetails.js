@@ -42,6 +42,10 @@ export default ( props ) => {
     //state for the edit morph modal
     const [editMorphModal, setEditMorphModal] = useState(false)
     const editMorphToggle = () => setEditMorphModal(!editMorphModal)
+    
+    //state for the image upload modal
+    const [imageUploadModal, setImageUploadModal] = useState(false)
+    const imageUploadToggle = () => setImageUploadModal(!imageUploadModal)
 
     //function that deletes gecko info from all tables
     const removeGecko = () => {
@@ -53,11 +57,11 @@ export default ( props ) => {
     <>
         <article className="geckoDetails">
             <section className="geckoDetails__leftColumn">
-                <img src={require("../images/sample.gif")} className="featuredImage" alt="sample" />
+                <img src={require("../../images/sample.gif")} className="featuredImage" alt="sample" />
                 <div><h1>{currentGecko.name}</h1></div>
                 <div className="geckoDetails__hatchDateAndSex">
-                    <div className="geckoDetails__hatchDate"><img src={require("../images/icon_hatch.png")} alt="hatch date" title="hatch date" />{currentGecko.hatchDate !== null ? timestampToDateString(currentGecko.hatchDate) : "unknown"}</div>
-                    <div className="geckoDetails__sex">{currentGecko.sex === 0 ? <img src={require("../images/icon_female.png")} alt="female" /> : <img src={require("../images/icon_male.png")} alt="male" />}</div>
+                    <div className="geckoDetails__hatchDate"><img src={require("../../images/icon_hatch.png")} alt="hatch date" title="hatch date" />{currentGecko.hatchDate !== null ? timestampToDateString(currentGecko.hatchDate) : "unknown"}</div>
+                    <div className="geckoDetails__sex">{currentGecko.sex === 0 ? <img src={require("../../images/icon_female.png")} alt="female" /> : <img src={require("../../images/icon_male.png")} alt="male" />}</div>
                 </div>
                 <div>{currentGecko.profile}</div>
                     {currentGeckoMorph.colorMorph !== "" ? <Badge className="mr-1">{currentGeckoMorph.colorMorph}</Badge> : ""}
@@ -74,6 +78,13 @@ export default ( props ) => {
                     color="info"
                     onClick={editMorphToggle}
                     >Change Morph</Button>
+                </div>
+                <div className="text-right mt-2">
+                    <Button
+                    className="btn-sm"
+                    color="info"
+                    onClick={imageUploadToggle}
+                    >Add Image</Button>
                 </div>
             </section>
             <section className="geckoDetails__rightColumn">
@@ -108,6 +119,15 @@ export default ( props ) => {
             </ModalHeader>
             <ModalBody>
                 <EditMorph toggle={editMorphToggle} morphObjToEdit={currentGeckoMorph} />
+            </ModalBody>
+        </Modal>
+
+        <Modal isOpen={imageUploadModal} toggle={imageUploadToggle}>
+            <ModalHeader toggle={imageUploadToggle}>
+                Upload Image
+            </ModalHeader>
+            <ModalBody>
+               
             </ModalBody>
         </Modal>
     </>)
