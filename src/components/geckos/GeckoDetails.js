@@ -8,6 +8,7 @@ import { timestampToDateString } from "../../utilities/timestampToString"
 import EditGeckoForm from "./EditGeckoForm"
 import EditMorph from "./EditMorph"
 import UploadImage from "../images/UploadImage"
+import ImageThumbList from "../images/ImageThumbList"
 
 
 export default ( props ) => {
@@ -80,7 +81,8 @@ export default ( props ) => {
                     onClick={editMorphToggle}
                     >Change Morph</Button>
                 </div>
-                <div className="text-right mt-2">
+                <div className="text-right mt-2 imageList">
+                    <ImageThumbList geckoId={geckoId} />
                     <Button
                     className="btn-sm"
                     color="info"

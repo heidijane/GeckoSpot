@@ -60,6 +60,18 @@
     height: 20px;
 }
 
+.imageList .thumbnail img {
+    object-fit: cover;
+    width: 150px;
+    height: 100px;
+}
+
+.imageList .thumbnail {
+    width: 33%; /*Use this to control width of the parent container, hence the image*/
+    height: 100px;
+    overflow: hidden;
+}
+
 @media only screen and (max-width: 950px) {
     .geckoDetails {
         display: block;
