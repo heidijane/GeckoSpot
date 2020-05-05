@@ -105,6 +105,7 @@ export default ({ toggle, morphToggle, setMorphGeckoId }) => {
                 >Add New Gecko</Button>   
                 <Button
                 onClick={toggle}
+                className="ml-2"
                 >Cancel</Button>   
             </FormGroup>
         </Form>

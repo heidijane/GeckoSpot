@@ -288,7 +288,7 @@ export default ({ toggle, morphObjToEdit }) => {
                     }
                 }
                 >Save Morph</Button>
-                <Button onClick={toggle}>Cancel</Button>
+                <Button onClick={toggle} className="ml-2">Cancel</Button>
             </FormGroup>
             
         </Form>

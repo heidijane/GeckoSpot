@@ -291,7 +291,7 @@ export default ({ geckoId, toggle }) => {
                     }
                 }
                 >Save Morph</Button>
-                <Button onClick={toggle}>Skip</Button>
+                <Button onClick={toggle} className="ml-2">Skip</Button>
             </FormGroup>
             
         </Form>

@@ -113,6 +113,7 @@ export default ({ toggle, geckoObjToEdit }) => {
                 >Edit Gecko Info</Button>   
                 <Button
                 onClick={toggle}
+                className="ml-2"
                 >Cancel</Button>   
             </FormGroup>
         </Form>

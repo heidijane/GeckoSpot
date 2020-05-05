@@ -62,16 +62,18 @@ export default ( props ) => {
                     <div className="geckoDetails__sex">{currentGecko.sex === 0 ? <img src={require("../images/icon_female.png")} alt="female" /> : <img src={require("../images/icon_male.png")} alt="male" />}</div>
                 </div>
                 <div>{currentGecko.profile}</div>
-                    {currentGeckoMorph.colorMorph !== "" ? <Badge>{currentGeckoMorph.colorMorph}</Badge> : ""}
-                    {currentGeckoMorph.eyeMorph !== "" && currentGeckoMorph.eyeMorph !== "Normal" ? <Badge>{currentGeckoMorph.eyeMorph}</Badge> : ""}
+                    {currentGeckoMorph.colorMorph !== "" ? <Badge className="mr-1">{currentGeckoMorph.colorMorph}</Badge> : ""}
+                    {currentGeckoMorph.eyeMorph !== "" && currentGeckoMorph.eyeMorph !== "Normal" ? <Badge className="mr-1">{currentGeckoMorph.eyeMorph}</Badge> : ""}
                     {currentGeckoMorph.sizeMorph !== "" && currentGeckoMorph.sizeMorph !== "Normal" ? <Badge>{currentGeckoMorph.sizeMorph}</Badge> : ""}
-                <div className="text-right">
+                <div className="text-right mt-2">
                     <Button 
                     className="btn-sm"
+                    color="info"
                     onClick={editGeckoToggle}
-                    >Edit</Button>
+                    >Edit Gecko Info</Button>
                     <Button 
-                    className="btn-sm"
+                    className="btn-sm ml-2"
+                    color="info"
                     onClick={editMorphToggle}
                     >Change Morph</Button>
                 </div>

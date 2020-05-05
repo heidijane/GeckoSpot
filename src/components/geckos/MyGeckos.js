@@ -21,8 +21,11 @@ export default ({ setPageState, setGeckoDetailsId }) => {
 
     return (
         <>
-            <Button onClick={addGeckoToggle}>Add Gecko</Button>
-            <Button onClick={addMealModalToggle}>Log a Meal</Button>
+            <div className="text-right">
+                <Button onClick={addGeckoToggle} color="primary">Add Gecko</Button>
+                <Button onClick={addMealModalToggle} color="primary" className="ml-2">Log a Meal</Button>
+            </div>
+            
             <GeckoList setPageState={setPageState} setGeckoDetailsId={setGeckoDetailsId} />
             <Modal isOpen={addGeckoModal} toggle={addGeckoToggle} backdrop={"static"}>
                 <ModalHeader toggle={addGeckoToggle}>
