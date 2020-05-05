@@ -128,7 +128,7 @@ export default ( props ) => {
                 Upload Image
             </ModalHeader>
             <ModalBody>
-               <UploadImage />
+               <UploadImage toggle={imageUploadToggle} geckoId={geckoId} />
             </ModalBody>
         </Modal>
     </>)

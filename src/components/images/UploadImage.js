@@ -1,10 +1,22 @@
-import React, { useState, useRef } from "react"
-import { Form, FormGroup, Input, Label, Spinner } from "reactstrap"
+import React, { useState, useEffect, useContext } from "react"
+import { Form, FormGroup, Input, Label, Spinner, Button } from "reactstrap"
+import { ImageContext } from "./ImageProvider"
 
-export default () => {
+export default ({ geckoId, toggle }) => {
+
+    const { addImage } = useContext(ImageContext)
 
     const [image, setImage] = useState("")
     const [loading, setLoading] = useState(false)
+    const [disabled, setDisabled] = useState(true)
+
+    useEffect(() => {
+        if (image !== "") {
+            setDisabled(false)
+        } else {
+            setDisabled(true)
+        }
+    }, [image])
 
     const uploadImage = async e => {
         const files = e.target.files
@@ -25,7 +37,13 @@ export default () => {
         setLoading(false)
     }
 
-    const fileURL = useRef()
+    const saveImage = () => {
+        addImage({
+            geckoId: geckoId,
+            imageURL: image,
+            uploadDate: Math.round(new Date().getTime()/1000)
+        }).then(toggle)
+    }
 
     return (    
     <>
@@ -38,14 +56,24 @@ export default () => {
                     id="uploadImage"
                     placeholder="Choose an image..."
                     onChange={uploadImage}
-                    innerRef={fileURL}
                 />
                 {loading ? (
                     <Spinner color="warning" />
                 ): (
                     <img src={image} className="img-fluid img-thumbnail" />
                 )}
-                
+            </FormGroup>
+            <FormGroup className="text-right">
+                    <Button 
+                        color="primary"
+                        disabled={disabled}
+                        onClick={
+                            evt => {
+                                evt.preventDefault() // Prevent browser from submitting the form
+                                saveImage()
+                            }
+                        }
+                        >Save Image</Button>
             </FormGroup>
         </Form>
     </>
