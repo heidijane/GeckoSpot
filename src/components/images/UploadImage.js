@@ -60,7 +60,7 @@ export default ({ geckoId, toggle }) => {
                 {loading ? (
                     <Spinner color="warning" />
                 ): (
-                    <img src={image} className="img-fluid img-thumbnail" />
+                    <img src={image} className="img-fluid img-thumbnail" alt="" />
                 )}
             </FormGroup>
             <FormGroup className="text-right">

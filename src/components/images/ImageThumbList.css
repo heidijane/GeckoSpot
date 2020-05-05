@@ -1,0 +1,18 @@
+.imageModal {
+    text-align: center;
+}
+
+.imageModal img {
+    max-width: 100%;    
+}
+
+.modal-body {
+    background-color: transparent !important;
+    border-width: 0 !important;
+}
+
+.modal-content {
+    background-color: transparent !important;
+    border-width: 0 !important;
+    
+}
