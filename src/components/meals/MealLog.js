@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import { Card, CardHeader, CardBody, Button, Table } from "reactstrap"
 import { MealContext } from "./MealProvider"
 import { timestampToDateString } from "../../utilities/timestampToString"
+import "./MealLog.css"
 
 export default ({ geckoId, addMealModalToggle, setMealObjectToEdit }) => {
 
@@ -11,16 +12,16 @@ export default ({ geckoId, addMealModalToggle, setMealObjectToEdit }) => {
     geckoMeals.sort((a, b) => (a.mealDate > b.mealDate) ? 1 : (a.mealDate === b.mealDate) ? ((a.id > b.id) ? 1 : -1) : -1 )
 
     const mealTable = (
-        <Table>
+        <Table className="mealLog table-sm table-responsive">
                     <thead>
                         <tr>
-                            <td>Date</td>
-                            <td>Feeder</td>
-                            <td>Qty.</td>
-                            <td>Calcium</td>
-                            <td>d3</td>
-                            <td>Multi.</td>
-                            <td></td>
+                            <th className="align-middle border-top-0 pr-3">Date</th>
+                            <th className="align-middle w-100 border-top-0">Meal</th>
+                            <th className="align-middle text-center border-top-0 px-3">Qty</th>
+                            <th className="text-center highlight border"><small>Calcium</small></th>
+                            <th className="text-center highlight border"><small>D3</small></th>
+                            <th className="text-center highlight border"><small>Multi</small></th>
+                            <th className="text-nowrap border-top-0"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,15 +29,17 @@ export default ({ geckoId, addMealModalToggle, setMealObjectToEdit }) => {
                     return (
                         
                             <tr key={"mealrow"+meal.id}>
-                                <td>{timestampToDateString(meal.mealDate)}</td>
-                                <td>{meal.mealType}</td>
-                                <td>{meal.quantity}</td>
-                                <td>{meal.calciumSupplement === true ? "✔" : ""}</td>
-                                <td>{meal.d3Supplement === true ? "✔" : ""}</td>
-                                <td>{meal.multivitaminSupplement === true ? "✔" : ""}</td>
-                                <td>
-                                    <Button
-                                    className="btn-sm"
+                                <td className="align-middle">{timestampToDateString(meal.mealDate)}</td>
+                                <td className="align-middle">{meal.mealType}</td>
+                                <td className="text-center align-middle">{meal.quantity}</td>
+                                <td className="text-center highlight border align-middle">{meal.calciumSupplement === true ? "✔" : ""}</td>
+                                <td className="text-center highlight border align-middle">{meal.d3Supplement === true ? "✔" : ""}</td>
+                                <td className="text-center highlight border align-middle">{meal.multivitaminSupplement === true ? "✔" : ""}</td>
+                                <td className="text-right">
+                                    <div className="text-nowrap">
+                                        <Button
+                                    className="btn-sm m-1"
+                                    color="info"
                                     onClick={() => {
                                         setMealObjectToEdit(meal)
                                         addMealModalToggle()
@@ -45,8 +48,10 @@ export default ({ geckoId, addMealModalToggle, setMealObjectToEdit }) => {
                                     >edit</Button>
                                     <Button 
                                         className="btn-sm"
+                                        color="danger"
                                         onClick={() => deleteMeal(meal.id)}
                                     >delete</Button>
+                                    </div>
                                 </td>
                             </tr>
                         
@@ -58,11 +63,11 @@ export default ({ geckoId, addMealModalToggle, setMealObjectToEdit }) => {
 
     return (
         <Card>
-            <CardHeader>
+            <CardHeader className="align-middle">
                 Meal Log
                 <Button 
                     color="primary"
-                    className="btn-sm"
+                    className="btn-sm float-right"
                     onClick={addMealModalToggle}
                     >
                         Add New Meal

@@ -26,7 +26,7 @@ export default ({ setPageState, setGeckoDetailsId }) => {
                     return (
                         <Card 
                             key={"gecko_"+gecko.id}
-                            className="geckoCard"
+                            className="geckoCard shadow-sm"
                             onClick={
                                 () => {
                                     setGeckoDetailsId(gecko.id)
@@ -35,7 +35,7 @@ export default ({ setPageState, setGeckoDetailsId }) => {
                                 }>
                             <CardImg top width="100%" src={require("../images/sample.gif")} />
                             <CardTitle className="geckoCard__title">{gecko.name}</CardTitle>
-                            {filteredMeals.length === 0 ? "" : <CardText>Last fed {filteredMeals[0].quantity} {pluralize(filteredMeals[0].mealType, filteredMeals[0].quantity)} on {timestampToDateString(filteredMeals[0].mealDate)}</CardText>}
+                            {filteredMeals.length === 0 ? "" : <CardText className="p-3">Last fed {filteredMeals[0].quantity} {pluralize(filteredMeals[0].mealType, filteredMeals[0].quantity)} on {timestampToDateString(filteredMeals[0].mealDate)}</CardText>}
                         </Card>
                     )
                 })}

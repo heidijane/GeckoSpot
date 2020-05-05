@@ -1,0 +1,11 @@
+.mealLog thead td {
+    border-top-width: 0;
+}
+
+.highlight {
+    background-color: #fafafa;
+}
+
+.text-nowrap {
+    white-space: nowrap;
+}
