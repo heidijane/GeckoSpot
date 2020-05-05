@@ -6,12 +6,12 @@
     max-width: 100%;    
 }
 
-.modal-body {
+.imageModal .modal-body {
     background-color: transparent !important;
     border-width: 0 !important;
 }
 
-.modal-content {
+.imageModal .modal-content {
     background-color: transparent !important;
     border-width: 0 !important;
     
