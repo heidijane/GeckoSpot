@@ -33,6 +33,17 @@ export const GeckoProvider = (props) => {
             .then(getGeckos)
     }
 
+    const updateGecko = gecko => {
+        return fetch(`http://localhost:8088/geckos/${gecko.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(gecko)
+        })
+            .then(getGeckos)
+    }
+
     const addMorph = morph => {
         return fetch("http://localhost:8088/geckoMorphs", {
             method: "POST",
@@ -44,13 +55,20 @@ export const GeckoProvider = (props) => {
             .then(getGeckos)
     }
 
-    const updateGecko = gecko => {
-        return fetch(`http://localhost:8088/geckos/${gecko.id}`, {
+    const updateMorph = morph => {
+        return fetch(`http://localhost:8088/geckoMorphs/${morph.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(gecko)
+            body: JSON.stringify(morph)
+        })
+            .then(getGeckos)
+    }
+
+    const deleteMorph = morphId => {
+        return fetch(`http://localhost:8088/geckoMorphs/${morphId}`, {
+            method: "DELETE"
         })
             .then(getGeckos)
     }
@@ -65,7 +83,7 @@ export const GeckoProvider = (props) => {
 
     return (
         <GeckoContext.Provider value={{
-            geckos, addGecko, deleteGecko, addMorph, updateGecko
+            geckos, addGecko, deleteGecko, addMorph, updateGecko, updateMorph, deleteMorph
         }}>
             {props.children}
         </GeckoContext.Provider>
