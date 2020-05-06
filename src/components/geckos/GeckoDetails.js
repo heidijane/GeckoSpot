@@ -9,11 +9,13 @@ import EditGeckoForm from "./EditGeckoForm"
 import EditMorph from "./EditMorph"
 import UploadImage from "../images/UploadImage"
 import ImageThumbList from "../images/ImageThumbList"
+import { ImageContext } from "../images/ImageProvider"
 
 
 export default ( props ) => {
 
     const { geckos, deleteGecko } = useContext(GeckoContext)
+    const { images } = useContext(ImageContext)
 
     const geckoId = props.geckoId
 
@@ -30,6 +32,9 @@ export default ( props ) => {
     } else {
         currentGeckoMorph = currentGecko.geckoMorphs[0]
     }
+
+    //get featured image info
+    const featuredImage = images.find(image => image.id === currentGecko.featuredImageId)
 
     const [addMealModal, setAddMealModal] = useState(false)
     const addMealModalToggle = () => setAddMealModal(!addMealModal)
@@ -59,7 +64,12 @@ export default ( props ) => {
     <>
         <article className="geckoDetails">
             <section className="geckoDetails__leftColumn">
-                <img src={require("../../images/sample.gif")} className="featuredImage" alt="sample" />
+                {currentGecko.featuredImageId === null ? (
+                    <div className="featuredImage"></div>
+                ): (
+                    <img src={featuredImage.imageURL} className="featuredImage" alt="" />
+                )}
+                
                 <div><h1>{currentGecko.name}</h1></div>
                 <div className="geckoDetails__hatchDateAndSex">
                     <div className="geckoDetails__hatchDate"><img src={require("../../images/icon_hatch.png")} alt="hatch date" title="hatch date" />{currentGecko.hatchDate !== null ? timestampToDateString(currentGecko.hatchDate) : "unknown"}</div>
