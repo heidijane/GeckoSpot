@@ -54,6 +54,10 @@ export default ( props ) => {
     const [imageUploadModal, setImageUploadModal] = useState(false)
     const imageUploadToggle = () => setImageUploadModal(!imageUploadModal)
 
+    //state for the select profile image modal
+    const [featuredImageModal, setFeaturedImageModal] = useState(false)
+    const featuredImageToggle = () => setFeaturedImageModal(!featuredImageModal)
+
     //function that deletes gecko info from all tables
     const removeGecko = () => {
         deleteGecko(geckoId)
@@ -64,12 +68,14 @@ export default ( props ) => {
     <>
         <article className="geckoDetails">
             <section className="geckoDetails__leftColumn">
-                {currentGecko.imageId === 0 ? (
-                    <div className="featuredImage featuredImage_placeholder"></div>
-                ): (
-                    <img src={featuredImage.imageURL} className="featuredImage" alt="" />
-                )}
-                
+                <div className="featuredImage_wrapper">
+                    {currentGecko.imageId === 0 ? (
+                        <div className="featuredImage featuredImage_placeholder"></div>
+                    ): (
+                        <img src={featuredImage.imageURL} className="featuredImage" alt="" />
+                    )}
+                        <Button className="changeImageButton btn-sm ml-2" onClick={featuredImageToggle}>Change</Button>
+                </div>
                 <div><h1>{currentGecko.name}</h1></div>
                 <div className="geckoDetails__hatchDateAndSex">
                     <div className="geckoDetails__hatchDate"><img src={require("../../images/icon_hatch.png")} alt="hatch date" title="hatch date" />{currentGecko.hatchDate !== null ? timestampToDateString(currentGecko.hatchDate) : "unknown"}</div>
@@ -141,6 +147,17 @@ export default ( props ) => {
             </ModalHeader>
             <ModalBody>
                <UploadImage toggle={imageUploadToggle} geckoId={geckoId} />
+            </ModalBody>
+        </Modal>
+
+        <Modal isOpen={featuredImageModal} toggle={featuredImageToggle} scrollable={true}>
+            <ModalHeader toggle={featuredImageToggle}>
+                Choose an image
+            </ModalHeader>
+            <ModalBody>
+                <div className="text-right mt-2 imageList larger">
+                    <ImageThumbList geckoId={geckoId} currentUser={true} />
+                </div>
             </ModalBody>
         </Modal>
     </>)

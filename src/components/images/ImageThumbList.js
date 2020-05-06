@@ -2,10 +2,12 @@ import React, { useContext, useState } from "react"
 import { ImageContext } from "./ImageProvider"
 import { Modal, ModalBody, Button } from "reactstrap"
 import "./ImageThumbList.css"
+import { GeckoContext } from "../geckos/GeckoProvider"
 
 export default ({ geckoId, currentUser }) => {
 
     const { images, deleteImage } = useContext(ImageContext)
+    const { geckos, updateGecko } = useContext(GeckoContext)
     const currentGeckoImages = images.filter(image => image.geckoId === geckoId)
 
     //states for the image modal
@@ -18,6 +20,21 @@ export default ({ geckoId, currentUser }) => {
             deleteImage(imageId)
             imageToggle()
         }
+    }
+
+    const featureImage = (newImageId) => {
+        //find the object associated with the geckoId
+        const geckoObj = geckos.find(gecko => gecko.id === geckoId)
+        const newGeckoObj = {
+            userId: geckoObj.userId,
+            name:  geckoObj.name,
+            sex: geckoObj.sex,
+            hatchDate: geckoObj.hatchDate,
+            profile: geckoObj.profile,
+            imageId: newImageId,
+            id: geckoObj.id
+        }
+        updateGecko(newGeckoObj)
     }
 
     return (
@@ -48,7 +65,10 @@ export default ({ geckoId, currentUser }) => {
                     <img src={chosenImage.imageURL}  alt={chosenImage.imageNote} id="spotlightImage" />
                     <div className="image_userActions">
                     {currentUser ? (
-                                        <Button className="btn-sm" onClick={() => removeImage(chosenImage.id)}>Delete</Button>
+                                        <>
+                                        <Button className="btn-sm" onClick={() => featureImage(chosenImage.id)}>Make Gecko Profile Photo</Button>
+                                        <Button className="btn-sm ml-2" onClick={() => removeImage(chosenImage.id)}>Delete</Button>
+                                        </>
                                     ): (
                                         ""
                                     )}

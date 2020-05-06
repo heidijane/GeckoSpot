@@ -35,6 +35,7 @@ export default ({ toggle, geckoObjToEdit }) => {
                 sex: parseInt(geckoSex.current.value),
                 hatchDate: convertToTimestamp(hatchDate.current.state.value),
                 profile: geckoProfile.current.value,
+                imageId: geckoObjToEdit.imageId,
                 id: geckoObjToEdit.id
             }
             updateGecko(newGeckoObj)

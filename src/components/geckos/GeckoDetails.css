@@ -67,9 +67,41 @@
 }
 
 .imageList .thumbnail {
-    width: 33%; /*Use this to control width of the parent container, hence the image*/
+    width: 33%;
     height: 100px;
     overflow: hidden;
+}
+
+.imageList.larger .thumbnail {
+    width: 48%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.imageList.larger .thumbnail img {
+    object-fit: cover;
+    width: 100%;
+    height: 200px;
+}
+
+
+.featuredImage_wrapper {
+    position: relative;
+}
+.changeImageButton {
+    position: absolute;
+    top:0;
+    right:0;
+    margin: .5em;
+    display: none;
+}
+
+.changeImageButton:hover {
+    display: block;
+}
+
+.featuredImage:hover + .changeImageButton {
+    display: block;
 }
 
 .featuredImage_placeholder {
@@ -79,7 +111,7 @@
     background-image: url("../../images/gecko_placeholder.png");
     background-repeat: no-repeat;
     background-position: center;
-    }
+}
 
 @media only screen and (max-width: 950px) {
     .geckoDetails {
