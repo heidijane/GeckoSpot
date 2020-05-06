@@ -72,6 +72,15 @@
     overflow: hidden;
 }
 
+.featuredImage_placeholder {
+    min-width: 250px;
+    height: 200px;
+    background-color: lightgray;
+    background-image: url("../../images/gecko_placeholder.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    }
+
 @media only screen and (max-width: 950px) {
     .geckoDetails {
         display: block;

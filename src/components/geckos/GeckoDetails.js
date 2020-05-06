@@ -34,7 +34,7 @@ export default ( props ) => {
     }
 
     //get featured image info
-    const featuredImage = images.find(image => image.id === currentGecko.featuredImageId)
+    const featuredImage = images.find(image => image.id === currentGecko.imageId)
 
     const [addMealModal, setAddMealModal] = useState(false)
     const addMealModalToggle = () => setAddMealModal(!addMealModal)
@@ -64,8 +64,8 @@ export default ( props ) => {
     <>
         <article className="geckoDetails">
             <section className="geckoDetails__leftColumn">
-                {currentGecko.featuredImageId === null ? (
-                    <div className="featuredImage"></div>
+                {currentGecko.imageId === 0 ? (
+                    <div className="featuredImage featuredImage_placeholder"></div>
                 ): (
                     <img src={featuredImage.imageURL} className="featuredImage" alt="" />
                 )}

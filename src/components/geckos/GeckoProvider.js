@@ -6,7 +6,7 @@ export const GeckoProvider = (props) => {
     const [geckos, setGeckos] = useState([])
 
     const getGeckos = () => {
-        return fetch("http://localhost:8088/geckos?_embed=geckoMorphs")
+        return fetch("http://localhost:8088/geckos?_embed=geckoMorphs&_expand=image")
             .then(res => res.json())
             .then(setGeckos)
     }
