@@ -34,7 +34,7 @@ export default ( props ) => {
     }
 
     //get featured image info
-    const featuredImage = currentGecko.image
+    const featuredImage = images.find(image => image.id === currentGecko.imageId)
 
     const [addMealModal, setAddMealModal] = useState(false)
     const addMealModalToggle = () => setAddMealModal(!addMealModal)
