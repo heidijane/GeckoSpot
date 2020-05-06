@@ -4,12 +4,14 @@ import { Card, CardImg, CardTitle, CardText } from "reactstrap"
 import "./GeckoList.css"
 import { MealContext } from "../meals/MealProvider"
 import { timestampToDateString } from "../../utilities/timestampToString"
+import { ImageContext } from "../images/ImageProvider"
 var pluralize = require('pluralize')
 
 export default ({ setPageState, setGeckoDetailsId }) => {
 
     const { geckos } = useContext(GeckoContext)
     const { meals } = useContext(MealContext)
+    const { images } = useContext(ImageContext)
 
     const currentUserId = parseInt(sessionStorage.getItem("activeUser"))
 
@@ -19,6 +21,8 @@ export default ({ setPageState, setGeckoDetailsId }) => {
         return (
             <section className="geckoList">
                 {userGeckos.map(gecko => {
+                    //get featured image for gecko
+                    const featuredImage = images.find(image => image.id === gecko.imageId)
                     //get most recent meal for current gecko
                     const filteredMeals = meals.filter(meal => meal.geckoId === gecko.id)
                     //sort meals by date
@@ -33,7 +37,11 @@ export default ({ setPageState, setGeckoDetailsId }) => {
                                     setPageState("geckoDetails")
                                 } 
                                 }>
-                            <CardImg top width="100%" src={require("../../images/sample.gif")} />
+                            {gecko.imageId === 0 || gecko.imageId === null ? (
+                                <div className="featuredImage featuredImage_placeholder"></div>
+                            ): (
+                                <CardImg top width="100%" src={featuredImage.imageURL} />
+                            )}                            
                             <CardTitle className="geckoCard__title">{gecko.name}</CardTitle>
                             {filteredMeals.length === 0 ? "" : <CardText className="p-3">Last fed {filteredMeals[0].quantity} {pluralize(filteredMeals[0].mealType, filteredMeals[0].quantity)} on {timestampToDateString(filteredMeals[0].mealDate)}</CardText>}
                         </Card>
