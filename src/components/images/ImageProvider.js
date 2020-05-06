@@ -6,13 +6,13 @@ export const ImageProvider = (props) => {
     const [images, setImages] = useState([])
 
     const getImages = () => {
-        return fetch("http://localhost:8088/geckoGallery")
+        return fetch("http://localhost:8088/images")
             .then(res => res.json())
             .then(setImages)
     }
 
     const addImage = image => {
-        return fetch("http://localhost:8088/geckoGallery", {
+        return fetch("http://localhost:8088/images", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -27,7 +27,7 @@ export const ImageProvider = (props) => {
     }
 
     const deleteImage = imageId => {
-        return fetch(`http://localhost:8088/geckoGallery/${imageId}`, {
+        return fetch(`http://localhost:8088/images/${imageId}`, {
             method: "DELETE"
         })
             .then(getImages)
