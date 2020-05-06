@@ -68,6 +68,7 @@ export default ( props ) => {
     <>
         <article className="geckoDetails">
             <section className="geckoDetails__leftColumn">
+                <div className="d-flex justify-content-center">
                 <div className="featuredImage_wrapper">
                     {currentGecko.imageId === 0 || currentGecko.imageId === null ? (
                         <div className="featuredImage featuredImage_placeholder"></div>
@@ -75,6 +76,7 @@ export default ( props ) => {
                         <img src={featuredImage.imageURL} className="featuredImage" alt="" />
                     )}
                         <Button className="changeImageButton btn-sm ml-2" onClick={featuredImageToggle}>Change</Button>
+                </div>
                 </div>
                 <div><h1>{currentGecko.name}</h1></div>
                 <div className="geckoDetails__hatchDateAndSex">

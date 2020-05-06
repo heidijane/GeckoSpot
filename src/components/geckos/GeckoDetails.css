@@ -60,6 +60,14 @@
     height: 20px;
 }
 
+.thumbnail {
+    cursor: pointer;
+}
+
+.thumbnail:hover {
+    transform: scale(1.01);
+}
+
 .imageList .thumbnail img {
     object-fit: cover;
     width: 150px;
@@ -87,6 +95,8 @@
 
 .featuredImage_wrapper {
     position: relative;
+    width: fit-content;
+    text-align: center;
 }
 .changeImageButton {
     position: absolute;
@@ -105,7 +115,8 @@
 }
 
 .featuredImage_placeholder {
-    min-width: 250px;
+    min-width:250px;
+    width:100%;
     height: 200px;
     background-color: lightgray;
     background-image: url("../../images/gecko_placeholder.png");
@@ -130,5 +141,8 @@
 
     .featuredImage {
         max-width:300px;
+    }
+    .featuredImage.featuredImage_placeholder {
+        max-width: unset;
     }
 }
