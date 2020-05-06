@@ -45,12 +45,15 @@ export default ({ geckoId, currentUser }) => {
         <Modal isOpen={imageModal} toggle={imageToggle} className="imageModal" style={{maxWidth: '1600px', width: 'fit-content' }} centered={true}>
             <ModalBody>
                 <div className="position-relative">
-               <img src={chosenImage.imageURL}  alt={chosenImage.imageNote} id="spotlightImage" />
-               {currentUser ? (
-                                <div className="image_userActions"><Button className="btn-sm" onClick={() => removeImage(chosenImage.id)}>Delete</Button></div>
-                            ): (
-                                ""
-                            )}
+                    <img src={chosenImage.imageURL}  alt={chosenImage.imageNote} id="spotlightImage" />
+                    <div className="image_userActions">
+                    {currentUser ? (
+                                        <Button className="btn-sm" onClick={() => removeImage(chosenImage.id)}>Delete</Button>
+                                    ): (
+                                        ""
+                                    )}
+                    <Button onClick={imageToggle} className="btn-sm ml-2">Close</Button>
+                    </div>
                 </div>
         {chosenImage.imageNote !== "" ? <div className="imageNote">{chosenImage.imageNote}</div> : ""}
             </ModalBody>
