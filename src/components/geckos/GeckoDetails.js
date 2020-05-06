@@ -69,7 +69,7 @@ export default ( props ) => {
         <article className="geckoDetails">
             <section className="geckoDetails__leftColumn">
                 <div className="featuredImage_wrapper">
-                    {currentGecko.imageId === 0 ? (
+                    {currentGecko.imageId === 0 || currentGecko.imageId === null ? (
                         <div className="featuredImage featuredImage_placeholder"></div>
                     ): (
                         <img src={featuredImage.imageURL} className="featuredImage" alt="" />

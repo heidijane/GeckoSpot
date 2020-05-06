@@ -19,7 +19,7 @@ export default ({ geckoId, currentUser }) => {
     const geckoObj = geckos.find(gecko => gecko.id === geckoId)
 
     const unfeatureImage = () => {
-        updateFeaturedImage(geckoId, 0)
+        updateFeaturedImage(geckoId, null)
     }
 
     const removeImage = (imageId) => {

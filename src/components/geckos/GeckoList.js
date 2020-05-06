@@ -37,7 +37,7 @@ export default ({ setPageState, setGeckoDetailsId }) => {
                                     setPageState("geckoDetails")
                                 } 
                                 }>
-                            {gecko.imageId === 0 ? (
+                            {gecko.imageId === 0 || gecko.imageId === null ? (
                                 <div className="featuredImage featuredImage_placeholder"></div>
                             ): (
                                 <CardImg top width="100%" src={featuredImage.imageURL} />
