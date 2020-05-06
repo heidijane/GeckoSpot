@@ -6,8 +6,8 @@ import { GeckoContext } from "../geckos/GeckoProvider"
 
 export default ({ geckoId, currentUser }) => {
 
+    const { geckos, updateFeaturedImage } = useContext(GeckoContext)
     const { images, deleteImage } = useContext(ImageContext)
-    const { geckos, updateGecko } = useContext(GeckoContext)
     const currentGeckoImages = images.filter(image => image.geckoId === geckoId)
 
     //states for the image modal
@@ -15,26 +15,22 @@ export default ({ geckoId, currentUser }) => {
     const [chosenImage, setChosenImage] = useState({})
     const imageToggle = () => setImageModal(!imageModal)
 
+    //find the object associated with the geckoId, needed for deleting and featuring an image
+    const geckoObj = geckos.find(gecko => gecko.id === geckoId)
+
+    const unfeatureImage = () => {
+        updateFeaturedImage(geckoId, 0)
+    }
+
     const removeImage = (imageId) => {
         if (window.confirm("Are you sure you want to delete this image?")) {
-            deleteImage(imageId)
-            imageToggle()
+                deleteImage(imageId)
+                    .then(imageToggle)
         }
     }
 
     const featureImage = (newImageId) => {
-        //find the object associated with the geckoId
-        const geckoObj = geckos.find(gecko => gecko.id === geckoId)
-        const newGeckoObj = {
-            userId: geckoObj.userId,
-            name:  geckoObj.name,
-            sex: geckoObj.sex,
-            hatchDate: geckoObj.hatchDate,
-            profile: geckoObj.profile,
-            imageId: newImageId,
-            id: geckoObj.id
-        }
-        updateGecko(newGeckoObj)
+        updateFeaturedImage(geckoId, newImageId)
     }
 
     return (
@@ -66,8 +62,12 @@ export default ({ geckoId, currentUser }) => {
                     <div className="image_userActions">
                     {currentUser ? (
                                         <>
-                                        <Button className="btn-sm" onClick={() => featureImage(chosenImage.id)}>Make Gecko Profile Photo</Button>
-                                        <Button className="btn-sm ml-2" onClick={() => removeImage(chosenImage.id)}>Delete</Button>
+                                        {chosenImage.id !== geckoObj.imageId ? (
+                                            <>
+                                                <Button className="btn-sm" onClick={() => featureImage(chosenImage.id)}>Make Gecko Profile Photo</Button>
+                                                <Button className="btn-sm ml-2" onClick={() => removeImage(chosenImage.id)}>Delete</Button>
+                                            </>
+                                        ) : (<Button className="btn-sm" onClick={unfeatureImage}>Remove Profile Photo</Button>)}
                                         </>
                                     ): (
                                         ""
