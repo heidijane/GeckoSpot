@@ -82,7 +82,7 @@ export default ( props ) => {
                     >Change Morph</Button>
                 </div>
                 <div className="text-right mt-2 imageList">
-                    <ImageThumbList geckoId={geckoId} />
+                    <ImageThumbList geckoId={geckoId} currentUser={true} />
                     <Button
                     className="btn-sm"
                     color="info"

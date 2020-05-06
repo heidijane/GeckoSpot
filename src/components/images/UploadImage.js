@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect, useContext, useRef } from "react"
 import { Form, FormGroup, Input, Label, Spinner, Button } from "reactstrap"
 import { ImageContext } from "./ImageProvider"
 
@@ -37,10 +37,13 @@ export default ({ geckoId, toggle }) => {
         setLoading(false)
     }
 
+    const imageNote = useRef()
+
     const saveImage = () => {
         addImage({
             geckoId: geckoId,
             imageURL: image,
+            imageNote: imageNote.current.value,
             uploadDate: Math.round(new Date().getTime()/1000)
         }).then(toggle)
     }
@@ -49,7 +52,6 @@ export default ({ geckoId, toggle }) => {
     <>
         <Form>
             <FormGroup>
-                <Label for="">Image</Label>
                 <Input
                     type="file"
                     name="uploadImage"
@@ -57,11 +59,22 @@ export default ({ geckoId, toggle }) => {
                     placeholder="Choose an image..."
                     onChange={uploadImage}
                 />
+                <div className="text-center p-3 mb-2 bg-light text-dark">
                 {loading ? (
                     <Spinner color="warning" />
                 ): (
-                    <img src={image} className="img-fluid img-thumbnail" alt="" />
+                    <img src={image} className="img-fluid" alt="" />
                 )}
+                </div>
+            </FormGroup>
+            <FormGroup>
+                <Label for="imageForm__note">Image Note <span className="font-italic">(optional)</span></Label>
+                <Input
+                    innerRef={imageNote}
+                    type="textarea"
+                    id="geckoForm__profile"
+                    name="imageNote"
+                />
             </FormGroup>
             <FormGroup className="text-right">
                     <Button 

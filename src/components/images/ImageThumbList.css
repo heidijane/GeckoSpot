@@ -16,3 +16,27 @@
     border-width: 0 !important;
     
 }
+
+.imageNote {
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.5);
+    color:white;
+    font-size: .9em;
+    padding:.751em;
+}
+
+.image_userActions {
+    position: absolute;
+    top:0;
+    right:0;
+    margin: .5em;
+    display: none;
+}
+
+.image_userActions:hover {
+    display:block;
+}
+
+#spotlightImage:hover + div {
+    display: block;
+}

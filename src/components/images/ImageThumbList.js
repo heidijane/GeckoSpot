@@ -1,17 +1,24 @@
 import React, { useContext, useState } from "react"
 import { ImageContext } from "./ImageProvider"
-import { Modal, ModalBody } from "reactstrap"
+import { Modal, ModalBody, Button } from "reactstrap"
 import "./ImageThumbList.css"
 
-export default ({ geckoId }) => {
+export default ({ geckoId, currentUser }) => {
 
-    const { images } = useContext(ImageContext)
+    const { images, deleteImage } = useContext(ImageContext)
     const currentGeckoImages = images.filter(image => image.geckoId === geckoId)
 
     //states for the image modal
     const [imageModal, setImageModal] = useState(false)
     const [chosenImage, setChosenImage] = useState({})
     const imageToggle = () => setImageModal(!imageModal)
+
+    const removeImage = (imageId) => {
+        if (window.confirm("Are you sure you want to delete this image?")) {
+            deleteImage(imageId)
+            imageToggle()
+        }
+    }
 
     return (
         <>
@@ -28,7 +35,8 @@ export default ({ geckoId }) => {
                                 }
                             }
                             >
-                            <img src={image.imageURL} className="thumbnail img-thumbnail" alt="" />
+                            <img src={image.imageURL} className="thumbnail img-thumbnail" alt={image.imageNote} />
+
                         </div>
                     )
                 })
@@ -36,7 +44,15 @@ export default ({ geckoId }) => {
         </div>
         <Modal isOpen={imageModal} toggle={imageToggle} className="imageModal" style={{maxWidth: '1600px', width: 'fit-content' }} centered={true}>
             <ModalBody>
-               <img src={chosenImage.imageURL} />
+                <div className="position-relative">
+               <img src={chosenImage.imageURL}  alt={chosenImage.imageNote} id="spotlightImage" />
+               {currentUser ? (
+                                <div className="image_userActions"><Button className="btn-sm" onClick={() => removeImage(chosenImage.id)}>Delete</Button></div>
+                            ): (
+                                ""
+                            )}
+                </div>
+        {chosenImage.imageNote !== "" ? <div className="imageNote">{chosenImage.imageNote}</div> : ""}
             </ModalBody>
         </Modal>
         </>
