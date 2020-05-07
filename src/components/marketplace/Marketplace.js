@@ -71,7 +71,7 @@ export default () => {
                 </ModalBody>
             </Modal>
 
-            <Modal isOpen={myListingModal} toggle={myListingModalToggle} backdrop={"static"}>
+            <Modal isOpen={myListingModal} toggle={myListingModalToggle} scrollable={true}>
                 <ModalHeader toggle={myListingModalToggle}>
                     My Listing
                 </ModalHeader>
@@ -80,7 +80,7 @@ export default () => {
                 </ModalBody>
             </Modal>
 
-            <Modal isOpen={listingDetailsModal} toggle={listingDetailsModalToggle} backdrop={"static"}>
+            <Modal isOpen={listingDetailsModal} toggle={listingDetailsModalToggle} scrollable={true}>
                 <ModalHeader toggle={listingDetailsModalToggle}>
                     Listing Details
                 </ModalHeader>

@@ -6,7 +6,7 @@ export const ListingProvider = (props) => {
     const [listings, setListings] = useState([])
 
     const getListings = () => {
-        return fetch("http://localhost:8088/marketplace")
+        return fetch("http://localhost:8088/marketplace?_embed=marketplaceBuyers")
             .then(res => res.json())
             .then(setListings)
     }
@@ -44,17 +44,32 @@ export const ListingProvider = (props) => {
             .then(getListings)
     }
 
+    const addPurchaseInquiry = inquiry => {
+        return fetch("http://localhost:8088/marketplaceBuyers", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(inquiry)
+        })
+            .then(_ => _.json())
+            .then(inquiry => {
+                getListings()
+                return inquiry.id
+             })
+    }
+
     useEffect(() => {
         getListings()
     }, [])
 
     useEffect(() => {
-        console.log("****  MEAL LOG APPLICATION STATE CHANGED  ****")
+        console.log("****  MARKETPLACE APPLICATION STATE CHANGED  ****")
     }, [listings])
 
     return (
         <ListingContext.Provider value={{
-            listings, addListing, deleteListing, updateListing
+            listings, addListing, deleteListing, updateListing, addPurchaseInquiry
         }}>
             {props.children}
         </ListingContext.Provider>
