@@ -67,7 +67,7 @@ export default () => {
                     Create Marketplace Listing
                 </ModalHeader>
                 <ModalBody>
-                    <SellGeckoForm toggle={sellGeckoModalToggle} geckoId={null} />
+                    <SellGeckoForm toggle={sellGeckoModalToggle} geckoId={null} editListingObject={{id:null}} />
                 </ModalBody>
             </Modal>
 

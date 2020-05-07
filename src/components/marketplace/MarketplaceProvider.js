@@ -34,13 +34,29 @@ export const ListingProvider = (props) => {
     }
 
     const updateListing = listing => {
-        return fetch(`http://localhost:8088/marketplace/${listing.id}`, {
-            method: "PUT",
+        fetch(`http://localhost:8088/marketplace/${listing.id}`, {
+            method: "PATCH",
+                body: JSON.stringify({
+                    price: listing.price,
+                    listingNotes: listing.listingNotes
+            }),
             headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(listing)
-        })
+                "Content-type": "application/json; charset=UTF-8"
+            }
+            })
+            .then(getListings)
+    }
+
+    const transactionComplete = listingId => {
+        fetch(`http://localhost:8088/marketplace/${listingId}`, {
+            method: "PATCH",
+                body: JSON.stringify({
+                    transactionComplete: true
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+            })
             .then(getListings)
     }
 
@@ -69,7 +85,7 @@ export const ListingProvider = (props) => {
 
     return (
         <ListingContext.Provider value={{
-            listings, addListing, deleteListing, updateListing, addPurchaseInquiry
+            listings, addListing, deleteListing, updateListing, addPurchaseInquiry, transactionComplete
         }}>
             {props.children}
         </ListingContext.Provider>
