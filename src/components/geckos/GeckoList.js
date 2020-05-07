@@ -40,7 +40,7 @@ export default ({ setPageState, setGeckoDetailsId }) => {
                             {gecko.imageId === 0 || gecko.imageId === null ? (
                                 <div className="featuredImage featuredImage_placeholder"></div>
                             ): (
-                                <CardImg top width="100%" src={featuredImage.imageURL} />
+                                <CardImg top width="100%" src={featuredImage.imageURL} className="geckoCard__image" />
                             )}                            
                             <CardTitle className="geckoCard__title">{gecko.name}</CardTitle>
                             {filteredMeals.length === 0 ? "" : <CardText className="p-3">Last fed {filteredMeals[0].quantity} {pluralize(filteredMeals[0].mealType, filteredMeals[0].quantity)} on {timestampToDateString(filteredMeals[0].mealDate)}</CardText>}

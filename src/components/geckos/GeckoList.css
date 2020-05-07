@@ -19,6 +19,12 @@
     transform: scale(1.01);
 }
 
+.geckoCard__image {
+    width: 100%;
+    height: 10vw;
+    object-fit: cover;
+}
+
 .geckoCard__title {
     text-align: center;
     font-size: 1.5em;
