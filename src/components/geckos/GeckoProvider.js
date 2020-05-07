@@ -30,6 +30,7 @@ export const GeckoProvider = (props) => {
         return fetch(`http://localhost:8088/geckos/${geckoId}`, {
             method: "DELETE"
         })
+            .then(console.log('gecko deleted'))
             .then(getGeckos)
     }
 

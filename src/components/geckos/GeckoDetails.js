@@ -10,12 +10,14 @@ import EditMorph from "./EditMorph"
 import UploadImage from "../images/UploadImage"
 import ImageThumbList from "../images/ImageThumbList"
 import { ImageContext } from "../images/ImageProvider"
+import { MealContext } from "../meals/MealProvider"
 
 
 export default ( props ) => {
 
     const { geckos, deleteGecko } = useContext(GeckoContext)
     const { images } = useContext(ImageContext)
+    const { meals, deleteMeal } = useContext(MealContext)
 
     const geckoId = props.geckoId
 
@@ -60,6 +62,13 @@ export default ( props ) => {
 
     //function that deletes gecko info from all tables
     const removeGecko = () => {
+        // //delete the gecko's meals
+        // const deleteGeckoMeals = meals.filter(meal => meal.geckoId === geckoId)
+
+        // Promise.all(deleteGeckoMeals.map(meal =>
+        //     deleteMeal(meal.id)
+        // ))
+        
         deleteGecko(geckoId)
             .then(props.setPageState("myGeckos"))
     }
