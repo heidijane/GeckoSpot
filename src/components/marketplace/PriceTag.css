@@ -1,0 +1,20 @@
+.pricetag {
+    display: flex;    
+    justify-content: flex-end;
+    margin: 1em;
+}
+.pricetag_left {
+    min-width:25px;
+    background-image: url("../../images/tagleft.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-x: right;
+}
+
+.pricetag_right {
+    background-color: #F7DC6F;
+    padding: .25em .5em .25em .5em;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-left:-1px;
+}

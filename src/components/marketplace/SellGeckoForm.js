@@ -6,10 +6,19 @@ import { ListingContext } from "./MarketplaceProvider"
 export default ({ geckoId, toggle }) => {
 
     const { geckos } = useContext(GeckoContext)
-    const { addListing } = useContext(ListingContext)
+    const { listings, addListing } = useContext(ListingContext)
 
     const currentUserId = parseInt(sessionStorage.getItem("activeUser"))
     const currentUserGeckos = geckos.filter(gecko => gecko.userId === currentUserId)
+
+    //remove geckos that already have a listing
+    const filteredUserGeckos = currentUserGeckos.filter(gecko => {
+        if (listings.some(listing => listing.geckoId === gecko.id)) {
+            return false
+        } else {
+            return true
+        }
+    })
 
     const geckoToBeSold = useRef()
     const geckoPrice = useRef()
@@ -60,7 +69,7 @@ export default ({ geckoId, toggle }) => {
                 >
                     <option key={"feeder_default"} value="0">Please select...</option>
                     {
-                        currentUserGeckos.map(gecko => {
+                        filteredUserGeckos.map(gecko => {
                             return <option key={"geckoDropdown_"+gecko.id} value={gecko.id}>{gecko.name}</option>
                         })
                     }
@@ -94,7 +103,7 @@ export default ({ geckoId, toggle }) => {
                     placeholder="Brief description of gecko's personality, genetic background, etc."
                 />
             </FormGroup>
-            <FormGroup>
+            <FormGroup className="text-right">
                 <Button 
                     type="submit"
                     color="primary"
@@ -107,7 +116,7 @@ export default ({ geckoId, toggle }) => {
                 >
                     Create Listing
                     </Button>   
-                    <Button onClick={toggle}>Cancel</Button>
+                    <Button onClick={toggle} className="ml-2">Cancel</Button>
             </FormGroup>
         </Form>
     )
