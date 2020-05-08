@@ -16,5 +16,10 @@
     padding: .25em .5em .25em .5em;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    margin-left:-1px;
+    margin-left:-2px;
+}
+
+.pricetag_right.larger {
+    font-size: 1.05em;
+    vertical-align: middle;
 }

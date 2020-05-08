@@ -21,9 +21,12 @@ export default ({ setPageState, setGeckoDetailsId }) => {
 
     return (
         <>
-            <div className="text-right">
-                <Button onClick={addGeckoToggle} color="primary">Add Gecko</Button>
-                <Button onClick={addMealModalToggle} color="primary" className="ml-2">Log a Meal</Button>
+            <div className="page__navBar text-right">
+                <h4>My Geckos</h4>
+                <div className="text-right">
+                    <Button onClick={addGeckoToggle} color="primary">Add Gecko</Button>
+                    <Button onClick={addMealModalToggle} color="primary" className="ml-2">Log a Meal</Button>
+                </div>
             </div>
             
             <GeckoList setPageState={setPageState} setGeckoDetailsId={setGeckoDetailsId} />

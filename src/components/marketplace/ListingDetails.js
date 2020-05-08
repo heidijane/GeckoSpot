@@ -53,7 +53,13 @@ export default ({ geckoId}) => {
             <div className="text-right mt-2 imageList">
                 <ImageThumbList geckoId={geckoId} currentUser={false} />
             </div>
-            <div><h1>{currentGecko.name}</h1></div>
+            <div className="d-flex justify-content-start align-items-center">
+                <h1>{currentGecko.name}</h1>
+                <div className="pricetag larger">
+                    <div className="pricetag_left"></div>
+                    <div className="pricetag_right larger">${listing.price}</div>
+                </div>
+            </div>
             {currentGeckoMorph.colorMorph !== "" ? <Badge className="mr-1">{currentGeckoMorph.colorMorph}</Badge> : ""}
             {currentGeckoMorph.eyeMorph !== "" && currentGeckoMorph.eyeMorph !== "Normal" ? <Badge className="mr-1">{currentGeckoMorph.eyeMorph}</Badge> : ""}
             {currentGeckoMorph.sizeMorph !== "" && currentGeckoMorph.sizeMorph !== "Normal" ? <Badge>{currentGeckoMorph.sizeMorph}</Badge> : ""}

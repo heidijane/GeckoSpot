@@ -54,12 +54,16 @@ export default () => {
 
     return (
         <>
-            <div className="text-right">
-            <ButtonGroup>
-                <Button color="primary" onClick={() => setRSelected("all")} active={rSelected === "all"}>All Listings</Button>
-                <Button color="primary" onClick={() => setRSelected("currentUser")} active={rSelected === "currentUser"}>My Listings</Button>
-            </ButtonGroup>
-                <Button onClick={sellGeckoModalToggle} color="primary" className="ml-2">Sell a Gecko</Button>
+            <div className="page__navBar text-right">
+                <div className="d-flex justify-content-start align-items-center">
+                    <h4>My Geckos</h4>
+                    <ButtonGroup className="ml-2">
+                        <Button color="primary" onClick={() => setRSelected("all")} active={rSelected === "all"}>All Listings</Button>
+                        <Button color="primary" onClick={() => setRSelected("currentUser")} active={rSelected === "currentUser"}>My Listings</Button>
+                    </ButtonGroup>
+                </div>
+            
+                <Button onClick={sellGeckoModalToggle} color="success" className="ml-2">Sell a Gecko</Button>
             </div>
             <ListingList listings={geckoList} setGeckoDetailId={setGeckoDetailId} myListingModal={myListingModalToggle} listingDetailsModal={listingDetailsModalToggle} />
             <Modal isOpen={sellGeckoModal} toggle={sellGeckoModalToggle} backdrop={"static"}>

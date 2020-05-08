@@ -1,20 +1,15 @@
 import React from "react"
-import { NavbarBrand, NavItem, NavLink, Nav } from "reactstrap"
 import "./NavBar.css"
 
 export default ({ setPageState, logout } ) => {
     return (
-            <Nav id="navigation">
-                <NavbarBrand>GeckoSpot</NavbarBrand>
-                <NavItem>
-                    <NavLink onClick={() => { setPageState("myGeckos")}}>My Geckos</NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink onClick={() => { setPageState("marketplace")}}>Marketplace</NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink onClick={logout}>Logout</NavLink>
-                </NavItem>
-            </Nav>
+            <div id="navigation" className="d-flex justify-content-between">
+                <div className="d-flex justify-content-start">
+                <h3>GeckoSpot</h3>
+                    <div onClick={() => { setPageState("myGeckos")}} className="navLink">My Geckos</div>
+                    <div onClick={() => { setPageState("marketplace")}} className="navLink">Marketplace</div>
+                </div>
+                    <div onClick={logout} className="navLink">Logout</div>
+            </div>
     )
 }

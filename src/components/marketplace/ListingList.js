@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { GeckoContext } from "../geckos/GeckoProvider"
-import { Card, CardImg, CardTitle, CardText, Badge } from "reactstrap"
+import { Card, CardImg, CardTitle, Badge } from "reactstrap"
 import "../geckos/GeckoList.css"
 import { ImageContext } from "../images/ImageProvider"
 import "./PriceTag.css"
