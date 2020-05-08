@@ -24,7 +24,6 @@ export default ( {geckoId, toggle} ) => {
     //function to run when user wants to close the listing and transfer ownership
     const transferOwnership = (userId) => {
         if (window.confirm("Are you sure you wish to close this listing and transfer ownership? This cannot be undone.")) {
-            console.log(listing.id)
             updateOwner(geckoId, userId)
             transactionComplete(listing.id)
             toggle()
@@ -35,7 +34,7 @@ export default ( {geckoId, toggle} ) => {
         <>
         <SellGeckoForm geckoId={geckoId} editListingObject={listing} />
         <hr />
-        Potential Buyers
+        <h5>Potential Buyers</h5>
         {buyers.length > 0 ? (
             <ListGroup>
                 {buyers.map(buyer => {
@@ -63,7 +62,7 @@ export default ( {geckoId, toggle} ) => {
                 })}
             </ListGroup>
         ) : (
-            <>No inquieries yet!</>
+            <div>No inquieries yet!</div>
         )}
         <hr />
         <div className="text-right">

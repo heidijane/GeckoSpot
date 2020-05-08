@@ -10,14 +10,17 @@ import EditMorph from "./EditMorph"
 import UploadImage from "../images/UploadImage"
 import ImageThumbList from "../images/ImageThumbList"
 import { ImageContext } from "../images/ImageProvider"
-import { MealContext } from "../meals/MealProvider"
+import SellGeckoForm from "../marketplace/SellGeckoForm"
+import { ListingContext } from "../marketplace/MarketplaceProvider"
+import MyListing from "../marketplace/MyListing"
+import TransferGecko from "./TransferGecko"
 
 
 export default ( props ) => {
 
     const { geckos, deleteGecko } = useContext(GeckoContext)
     const { images } = useContext(ImageContext)
-    const { meals, deleteMeal } = useContext(MealContext)
+    const { listings } = useContext(ListingContext)
 
     const geckoId = props.geckoId
 
@@ -66,6 +69,20 @@ export default ( props ) => {
             .then(props.setPageState("myGeckos"))
     }
 
+    //sell in marketplace modal
+    const [sellModal, setSellModal] = useState(false)
+    const sellModalToggle = () => setSellModal(!sellModal)
+
+    //marketplace listing details modal
+    const [listingModal, setListingModal] = useState(false)
+    const listingModalToggle = () => setListingModal(!listingModal)
+
+    const listing = listings.find(listing => listing.geckoId === geckoId)
+
+    //transfer ownership modal
+    const [transferModal, setTransferModal] = useState(false)
+    const transferModalToggle = () => setTransferModal(!transferModal)
+
     return (
     <>
         <article className="geckoDetails">
@@ -113,8 +130,31 @@ export default ( props ) => {
             <section className="geckoDetails__rightColumn">
                 <MealLog geckoId={geckoId} addMealModalToggle={addMealModalToggle} setMealObjectToEdit={setMealObjectToEdit} />
                 <div className="text-right mt-2">
+                {listing === undefined ? (
+                    <Button
+                    color="success"
+                    onClick={sellModalToggle}
+                    >
+                        Sell in Marketplace
+                    </Button>
+                ) : (
+                    <Button
+                    color="success"
+                    onClick={listingModalToggle}
+                    >
+                        Listing Details
+                    </Button>
+                )}
+                <Button
+                    color="warning"
+                    onClick={transferModalToggle}
+                    className="ml-2"
+                >
+                    Transfer Ownership
+                </Button>
                 <Button
                     color="danger"
+                    className="ml-2"
                     onClick={() => {
                         if(window.confirm("Are you sure you want to delete this gecko?")) {
                             removeGecko()
@@ -162,6 +202,33 @@ export default ( props ) => {
                 <div className="text-right mt-2 imageList larger">
                     <ImageThumbList geckoId={geckoId} currentUser={true} />
                 </div>
+            </ModalBody>
+        </Modal>
+
+        <Modal isOpen={sellModal} toggle={sellModalToggle} scrollable={true}>
+            <ModalHeader toggle={sellModalToggle}>
+            Create Marketplace Listing
+            </ModalHeader>
+            <ModalBody>
+                <SellGeckoForm toggle={sellModalToggle} geckoId={geckoId} editListingObject={{id:null}} />
+            </ModalBody>
+        </Modal>
+
+        <Modal isOpen={listingModal} toggle={listingModalToggle} scrollable={true}>
+            <ModalHeader toggle={listingModalToggle}>
+            Listing Details
+            </ModalHeader>
+            <ModalBody>
+                <MyListing toggle={listingModalToggle} geckoId={geckoId} />
+            </ModalBody>
+        </Modal>
+
+        <Modal isOpen={transferModal} toggle={transferModalToggle} scrollable={true}>
+            <ModalHeader toggle={transferModalToggle}>
+            Transfer Ownership
+            </ModalHeader>
+            <ModalBody>
+                <TransferGecko toggle={listingModalToggle} geckoId={geckoId} setPageState={props.setPageState} />
             </ModalBody>
         </Modal>
     </>)
