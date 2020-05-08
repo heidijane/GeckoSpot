@@ -51,7 +51,8 @@ export default ({ geckoId, toggle, editListingObject }) => {
                 price: parsedGeckoPrice,
                 listingNotes: listingNotes.current.value,
                 listingDate: Math.round(new Date().getTime()/1000),
-                transactionComplete: false
+                transactionComplete: false,
+                deleted: false
             }
 
             addListing(newListingObj)
@@ -72,6 +73,8 @@ export default ({ geckoId, toggle, editListingObject }) => {
             window.alert("Please specify a selling price.")
         }
     }
+
+    if (filteredUserGeckos.length > 0 || editListingObject.id !== null) {
 
     return (
         <Form>
@@ -169,4 +172,11 @@ export default ({ geckoId, toggle, editListingObject }) => {
             </FormGroup>
         </Form>
     )
+                } else {
+                    return (
+                        <>
+                        You do not have any geckos that you can create listings for.
+                        </>
+                    )
+                }
 }

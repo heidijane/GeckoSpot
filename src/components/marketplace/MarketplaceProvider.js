@@ -6,7 +6,7 @@ export const ListingProvider = (props) => {
     const [listings, setListings] = useState([])
 
     const getListings = () => {
-        return fetch("http://localhost:8088/marketplace?_embed=marketplaceBuyers")
+        return fetch("http://localhost:8088/marketplace?deleted=false&transactionComplete=false&_embed=marketplaceBuyers")
             .then(res => res.json())
             .then(setListings)
     }
@@ -27,9 +27,15 @@ export const ListingProvider = (props) => {
     }
 
     const deleteListing = listingId => {
-        return fetch(`http://localhost:8088/marketplace/${listingId}`, {
-            method: "DELETE"
-        })
+        fetch(`http://localhost:8088/marketplace/${listingId}`, {
+            method: "PATCH",
+                body: JSON.stringify({
+                    deleted: true
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+            })
             .then(getListings)
     }
 

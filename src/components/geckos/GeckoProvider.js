@@ -80,6 +80,19 @@ export const GeckoProvider = (props) => {
             .then(getGeckos)
     }
 
+    const updateOwner = (geckoId, userId) => {
+        fetch(`http://localhost:8088/geckos/${geckoId}`, {
+            method: "PATCH",
+                body: JSON.stringify({
+                    userId: userId
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+            })
+            .then(getGeckos)
+    }
+
     useEffect(() => {
         getGeckos()
     }, [])
@@ -90,7 +103,7 @@ export const GeckoProvider = (props) => {
 
     return (
         <GeckoContext.Provider value={{
-            geckos, addGecko, deleteGecko, addMorph, updateGecko, updateMorph, updateFeaturedImage
+            geckos, addGecko, deleteGecko, addMorph, updateGecko, updateMorph, updateFeaturedImage, updateOwner
         }}>
             {props.children}
         </GeckoContext.Provider>

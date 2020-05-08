@@ -57,18 +57,19 @@ export default ( {listings, setGeckoDetailId, myListingModal, listingDetailsModa
                                 <CardImg top width="100%" src={featuredImage.imageURL} className="geckoCard__image" />
                             )}                            
                             <CardTitle className="geckoCard__title">{gecko.name}</CardTitle>
-                            <div>
+                            <div className="m-2 mt-n3">
                                 <div>
                                     {geckoMorph.colorMorph !== "" ? <Badge className="mr-1">{geckoMorph.colorMorph}</Badge> : ""}
                                     {geckoMorph.eyeMorph !== "" && geckoMorph.eyeMorph !== "Normal" ? <Badge className="mr-1">{geckoMorph.eyeMorph}</Badge> : ""}
                                     {geckoMorph.sizeMorph !== "" && geckoMorph.sizeMorph !== "Normal" ? <Badge>{geckoMorph.sizeMorph}</Badge> : ""}
                                 </div>
-                            <div>{truncate(listing.listingNotes)}</div>
-                                <div className="pricetag">
-                                    <div className="pricetag_left"></div>
-                            <div className="pricetag_right">${listing.price}</div>
-                                </div>
+                                <div>{truncate(listing.listingNotes)}</div>
+                                
                             </div>
+                            <div className="pricetag">
+                                    <div className="pricetag_left"></div>
+                                    <div className="pricetag_right">${listing.price}</div>
+                                </div>
                         </Card>
                     )
                 })}
