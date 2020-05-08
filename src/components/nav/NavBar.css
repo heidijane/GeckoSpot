@@ -1,24 +1,43 @@
+@font-face {
+    font-family: "Sniglet";
+    src: url("../../fonts/Sniglet-ExtraBold.otf");
+}
+
+@font-face {
+    font-family: "SnigletLight";
+    src: url("../../fonts/Sniglet-Regular.otf");
+}
+
+
 #navigation {
-    border: solid 1px #e6ac61;
-    background-color: #e9c391;
-    color: #3b3720;
-    padding: .5em;
+    border: solid 1px #FFBA91;
+    background-color: #ffd087;
+    color: #4a483c;
+}
+
+.navLogo {
+    font-family: Sniglet, sans-serif;
+    font-size: 2em;
+    letter-spacing: 2px;
+    padding: .15em;
 }
 
 .navLink {
-    border: solid 1px #e6ac61;
-    background-color: #e9c391;
+    font-family: SnigletLight, sans-serif;
+    border: 1px solid #e6ac61;
+    border-top-width: 0;
+    border-bottom-width: 0;
     cursor: pointer;
-    margin-left: 1em;
-    padding:.5em;
-    border-radius: 4px;
-    vertical-align: middle;
+    font-size: 1.05em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1em;
 }
 
 .navLink:hover {
-    background-color: #e6ac61;
+    background-color: #feb16a;
 }
 
 .navLink:active {
-    background-color: #d48c2c;
+    background-color: #f19b4b;
 }
