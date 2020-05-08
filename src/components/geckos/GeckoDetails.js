@@ -219,7 +219,7 @@ export default ( props ) => {
             Listing Details
             </ModalHeader>
             <ModalBody>
-                <MyListing toggle={listingModalToggle} geckoId={geckoId} />
+                <MyListing toggle={listingModalToggle} geckoId={geckoId} setPageState={props.setPageState} />
             </ModalBody>
         </Modal>
 

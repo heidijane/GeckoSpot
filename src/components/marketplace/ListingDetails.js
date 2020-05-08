@@ -38,7 +38,9 @@ export default ({ geckoId}) => {
     const createInquiry = () => {
         addPurchaseInquiry({
             marketplaceId: listing.id,
-            buyerId: currentUserId
+            buyerId: currentUserId,
+            transactionComplete: false,
+            purchased: false //changes to true if this user is the one who ends up purchasing the gecko
         }).then(window.alert(`${sellerObj.username} has been contacted regarding your interest!They will reach out to you via e-mail shortly.`))
     }
 
@@ -47,6 +49,8 @@ export default ({ geckoId}) => {
     if (listing.marketplaceBuyers.some(inquiry => inquiry.buyerId === currentUserId)) {
         alreadyInterested = true
     }
+
+    
 
     return (
         <section>

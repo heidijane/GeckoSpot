@@ -28,7 +28,7 @@ export const ImageProvider = (props) => {
     }
 
     const deleteImage = imageId => {
-        fetch(`http://localhost:8088/images/${imageId}`, {
+        return fetch(`http://localhost:8088/images/${imageId}`, {
             method: "PATCH",
                 body: JSON.stringify({
                     deleted: true

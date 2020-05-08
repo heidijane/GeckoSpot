@@ -7,7 +7,7 @@ import ListingDetails from "./ListingDetails"
 import { GeckoContext } from "../geckos/GeckoProvider"
 import { ListingContext } from "./MarketplaceProvider"
 
-export default () => {
+export default ( { setPageState } ) => {
 
     const currentUserId = parseInt(sessionStorage.getItem("activeUser"))
 
@@ -80,7 +80,7 @@ export default () => {
                     My Listing
                 </ModalHeader>
                 <ModalBody>
-                    <MyListing toggle={myListingModalToggle} geckoId={geckoDetailId} />
+                    <MyListing toggle={myListingModalToggle} geckoId={geckoDetailId} setPageState={setPageState} />
                 </ModalBody>
             </Modal>
 

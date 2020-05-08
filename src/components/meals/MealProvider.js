@@ -27,7 +27,7 @@ export const MealProvider = (props) => {
     }
 
     const deleteMeal = mealId => {
-        fetch(`http://localhost:8088/geckoMeals/${mealId}`, {
+        return fetch(`http://localhost:8088/geckoMeals/${mealId}`, {
             method: "PATCH",
                 body: JSON.stringify({
                     deleted: true

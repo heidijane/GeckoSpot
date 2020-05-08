@@ -30,7 +30,6 @@ export const GeckoProvider = (props) => {
         return fetch(`http://localhost:8088/geckos/${geckoId}`, {
             method: "DELETE"
         })
-            .then(console.log('gecko deleted'))
             .then(getGeckos)
     }
 
@@ -68,7 +67,7 @@ export const GeckoProvider = (props) => {
     }
 
     const updateFeaturedImage = (geckoId, imageId) => {
-        fetch(`http://localhost:8088/geckos/${geckoId}`, {
+        return fetch(`http://localhost:8088/geckos/${geckoId}`, {
             method: "PATCH",
                 body: JSON.stringify({
                     imageId: imageId
@@ -81,7 +80,7 @@ export const GeckoProvider = (props) => {
     }
 
     const updateOwner = (geckoId, userId) => {
-        fetch(`http://localhost:8088/geckos/${geckoId}`, {
+        return fetch(`http://localhost:8088/geckos/${geckoId}`, {
             method: "PATCH",
                 body: JSON.stringify({
                     userId: userId

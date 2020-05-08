@@ -10,7 +10,7 @@ export default ({ toggle, geckoId, setPageState }) => {
 
     const { updateOwner } = useContext(GeckoContext)
     const { users } = useContext(UserContext)
-    const { listings, transactionComplete } = useContext(ListingContext)
+    const { listings, transactionComplete, updateBuyers } = useContext(ListingContext)
 
     const currentUserId = parseInt(sessionStorage.getItem("activeUser"))
 
@@ -29,15 +29,34 @@ export default ({ toggle, geckoId, setPageState }) => {
     filteredUsers.sort((a, b) => (a.username > b.username) ? 1 : -1)
 
     const transferOwnership = (userId) => {
-        if (window.confirm("Are you sure you wish to transfer ownership of this gecko? This cannot be undone.")) {
-            updateOwner(geckoId, userId)
-            const listing = listings.find(listing => listing.geckoId === geckoId)
-            if (listing !== undefined) {
-                //close marketplace listing for gecko if there is one open
-                transactionComplete(listing.id)
+        if (userId === 0) {
+            window.alert("Please choose a user to transfer your gecko to.")
+        } else {
+            if (window.confirm("Are you sure you wish to transfer ownership of this gecko? This cannot be undone.")) {
+                updateOwner(geckoId, userId)
+                    .then(() => {
+                        const listing = listings.find(listing => listing.geckoId === geckoId)
+                        if (listing !== undefined) {
+                            //make a new array of marketplace buyer objects to update
+                            let buyersToUpdate = []
+                            listing.marketplaceBuyers.forEach(buyer => {
+                                let purchased = false
+                                if (userId === buyer.buyerId) {
+                                    purchased = true
+                                }
+                                buyersToUpdate.push({marketplaceBuyerId: buyer.id, purchased: purchased})
+                            }
+                            )
+                            updateBuyers(buyersToUpdate)
+                            //close marketplace listing for gecko if there is one open
+                            transactionComplete(listing.id)
+                        }
+                    })
+                    .then(() => {
+                        toggle()
+                        setPageState("myGeckos")
+                    })
             }
-            toggle()
-            setPageState("myGeckos")
         }
     }
 

@@ -27,7 +27,7 @@ export const ListingProvider = (props) => {
     }
 
     const deleteListing = listingId => {
-        fetch(`http://localhost:8088/marketplace/${listingId}`, {
+        return fetch(`http://localhost:8088/marketplace/${listingId}`, {
             method: "PATCH",
                 body: JSON.stringify({
                     deleted: true
@@ -40,7 +40,7 @@ export const ListingProvider = (props) => {
     }
 
     const updateListing = listing => {
-        fetch(`http://localhost:8088/marketplace/${listing.id}`, {
+        return fetch(`http://localhost:8088/marketplace/${listing.id}`, {
             method: "PATCH",
                 body: JSON.stringify({
                     price: listing.price,
@@ -54,7 +54,7 @@ export const ListingProvider = (props) => {
     }
 
     const transactionComplete = listingId => {
-        fetch(`http://localhost:8088/marketplace/${listingId}`, {
+        return fetch(`http://localhost:8088/marketplace/${listingId}`, {
             method: "PATCH",
                 body: JSON.stringify({
                     transactionComplete: true
@@ -80,6 +80,24 @@ export const ListingProvider = (props) => {
                 return inquiry.id
              })
     }
+    
+    const updateBuyers = (buyerArray) => { //seller purchased is boolean, whether or not this user is the one who finally purchased the gecko
+        Promise.all(buyerArray.map(buyer => {
+            return fetch(`http://localhost:8088/marketplaceBuyers/${buyer.marketplaceBuyerId}`, {
+                method: "PATCH",
+                    body: JSON.stringify({
+                        transactionComplete: true,
+                        purchased: buyer.purchased
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+                })
+                .then(getListings)
+            }
+        )) 
+            
+    }
 
     useEffect(() => {
         getListings()
@@ -91,7 +109,7 @@ export const ListingProvider = (props) => {
 
     return (
         <ListingContext.Provider value={{
-            listings, addListing, deleteListing, updateListing, addPurchaseInquiry, transactionComplete
+            listings, addListing, deleteListing, updateListing, addPurchaseInquiry, transactionComplete, updateBuyers
         }}>
             {props.children}
         </ListingContext.Provider>

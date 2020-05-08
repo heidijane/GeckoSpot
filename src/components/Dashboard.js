@@ -22,7 +22,7 @@ export default ({logout}) => {
     const [geckoDetailsId, setGeckoDetailsId] = useState()
 
     const showMyGeckos = () => <MyGeckos setPageState={setPageState} setGeckoDetailsId={setGeckoDetailsId} />
-    const showMarketplace = () => <Marketplace />
+    const showMarketplace = () => <Marketplace setPageState={setPageState} />
     const showGeckoDetails = () => <GeckoDetails setPageState={setPageState} geckoId={geckoDetailsId} />
 
     useEffect(() => {

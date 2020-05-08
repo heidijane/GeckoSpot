@@ -6,16 +6,21 @@ import { GeckoContext } from "../geckos/GeckoProvider"
 import { Button, ListGroup, ListGroupItem, Badge } from "reactstrap"
 import {CopyToClipboard} from 'react-copy-to-clipboard'
 
-export default ( {geckoId, toggle} ) => {
+export default ( {geckoId, toggle, setPageState} ) => {
 
     const { geckos, updateOwner } = useContext(GeckoContext)
     const { users } = useContext(UserContext)
-    const { listings, deleteListing, transactionComplete } = useContext(ListingContext)
+    const { listings, deleteListing, transactionComplete, updateBuyers } = useContext(ListingContext)
 
     //get listing for gecko
     const listing = listings.find(listing => listing.geckoId === geckoId)
 
-    const buyers = listing.marketplaceBuyers
+    let buyers = []
+    if (listing !== undefined) {
+        buyers = listing.marketplaceBuyers
+        //filter out old buyers
+        buyers = buyers.filter(buyer => buyer.transactionComplete === false)
+    }
 
     //create state for the copy to keyboard button
     const [copied, setCopied] = useState(false)
@@ -24,9 +29,25 @@ export default ( {geckoId, toggle} ) => {
     //function to run when user wants to close the listing and transfer ownership
     const transferOwnership = (userId) => {
         if (window.confirm("Are you sure you wish to close this listing and transfer ownership? This cannot be undone.")) {
+
+            //make a new array of marketplace buyer objects to update
+            let buyersToUpdate = []
+            buyers.forEach(buyer => {
+                let purchased = false
+                if (userId === buyer.buyerId) {
+                    purchased = true
+                }
+                buyersToUpdate.push({marketplaceBuyerId: buyer.id, purchased: purchased})
+            }
+            )
+
             updateOwner(geckoId, userId)
-            transactionComplete(listing.id)
-            toggle()
+                .then(transactionComplete(listing.id))
+                .then(updateBuyers(buyersToUpdate))
+                .then(() => {
+                    toggle()
+                    setPageState("myGeckos")
+                })
         }
     }
 
