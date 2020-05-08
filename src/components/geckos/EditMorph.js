@@ -6,41 +6,42 @@ import { GeckoContext } from "./GeckoProvider"
 
 export default ({ toggle, morphObjToEdit }) => {
 
-    const { addMorph, updateMorph, deleteMorph } = useContext(GeckoContext)
+    const { addMorph, updateMorph } = useContext(GeckoContext)
 
     const colorMorph = useRef()
     const eyeMorph = useRef()
     const sizeMorph = useRef()
 
     const createMorph = () => {
+
+        let newMorphObj = {}
         if (colorMorph.current.value === "" && eyeMorph.current.value === "" && sizeMorph.current.value === "") {
-            //if user hasn't inputted any morph info, delete info from the database if it exists
-            if (morphObjToEdit.id === null) {
-                //there wasn't any morph info to clear out so just close the modal
-                toggle()
-            } else {
-                deleteMorph(morphObjToEdit.id)
-                    .then(toggle)
+            newMorphObj = {
+                geckoId: morphObjToEdit.geckoId,
+                colorMorph: "",
+                eyeMorph: "",
+                sizeMorph: "",
             }
         } else {
-            const newMorphObj = {
+            newMorphObj = {
                 geckoId: morphObjToEdit.geckoId,
                 colorMorph: colorMorph.current.value,
                 eyeMorph: eyeMorph.current.value,
                 sizeMorph: sizeMorph.current.value,
             }
-
-            if (morphObjToEdit.id === null) {
-                //there isn't a row to update so add a new one
-                addMorph(newMorphObj)
-                    .then(toggle)
-
-            } else {
-                newMorphObj.id = morphObjToEdit.id
-                updateMorph(newMorphObj)
-                    .then(toggle)
-            }
         }
+
+        if (morphObjToEdit.id === null) {
+            //there isn't a row to update so add a new one
+            addMorph(newMorphObj)
+                .then(toggle)
+
+        } else {
+            newMorphObj.id = morphObjToEdit.id
+            updateMorph(newMorphObj)
+                .then(toggle)
+        }
+        
     }
 
     const colorMorphList = [

@@ -6,7 +6,7 @@ export const MealProvider = (props) => {
     const [meals, setMeals] = useState([])
 
     const getMeals = () => {
-        return fetch("http://localhost:8088/geckoMeals")
+        return fetch("http://localhost:8088/geckoMeals?deleted=false")
             .then(res => res.json())
             .then(setMeals)
     }
@@ -27,9 +27,15 @@ export const MealProvider = (props) => {
     }
 
     const deleteMeal = mealId => {
-        return fetch(`http://localhost:8088/geckoMeals/${mealId}`, {
-            method: "DELETE"
-        })
+        fetch(`http://localhost:8088/geckoMeals/${mealId}`, {
+            method: "PATCH",
+                body: JSON.stringify({
+                    deleted: true
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+            })
             .then(getMeals)
     }
 

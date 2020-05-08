@@ -62,14 +62,7 @@ export default ( props ) => {
 
     //function that deletes gecko info from all tables
     const removeGecko = () => {
-        // //delete the gecko's meals
-        // const deleteGeckoMeals = meals.filter(meal => meal.geckoId === geckoId)
-
-        // Promise.all(deleteGeckoMeals.map(meal =>
-        //     deleteMeal(meal.id)
-        // ))
-        
-        deleteGecko(geckoId)
+            deleteGecko(geckoId)
             .then(props.setPageState("myGeckos"))
     }
 

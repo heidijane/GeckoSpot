@@ -113,7 +113,8 @@ export default ({ geckoId, toggleState, toggle, mealObjectToEdit, setMealObjectT
                 calciumSupplement: calciumChecked,
                 d3Supplement: d3Checked,
                 multivitaminSupplement: multivitaminChecked,
-                mealDate: mealDateTimestamp
+                mealDate: mealDateTimestamp,
+                deleted: false
             }
 
             //if there is a mealObject that is being edited update the row, otherwise add a new one

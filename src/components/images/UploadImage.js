@@ -44,7 +44,8 @@ export default ({ geckoId, toggle }) => {
             geckoId: geckoId,
             imageURL: image,
             imageNote: imageNote.current.value,
-            uploadDate: Math.round(new Date().getTime()/1000)
+            uploadDate: Math.round(new Date().getTime()/1000),
+            deleted: false
         }).then(toggle)
     }
 

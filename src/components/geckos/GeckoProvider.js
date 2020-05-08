@@ -67,13 +67,6 @@ export const GeckoProvider = (props) => {
             .then(getGeckos)
     }
 
-    const deleteMorph = morphId => {
-        return fetch(`http://localhost:8088/geckoMorphs/${morphId}`, {
-            method: "DELETE"
-        })
-            .then(getGeckos)
-    }
-
     const updateFeaturedImage = (geckoId, imageId) => {
         fetch(`http://localhost:8088/geckos/${geckoId}`, {
             method: "PATCH",
@@ -97,7 +90,7 @@ export const GeckoProvider = (props) => {
 
     return (
         <GeckoContext.Provider value={{
-            geckos, addGecko, deleteGecko, addMorph, updateGecko, updateMorph, deleteMorph, updateFeaturedImage
+            geckos, addGecko, deleteGecko, addMorph, updateGecko, updateMorph, updateFeaturedImage
         }}>
             {props.children}
         </GeckoContext.Provider>

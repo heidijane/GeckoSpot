@@ -7,7 +7,7 @@ export const ImageProvider = (props) => {
     const [images, setImages] = useState([])
 
     const getImages = () => {
-        return fetch("http://localhost:8088/images")
+        return fetch("http://localhost:8088/images?deleted=false")
             .then(res => res.json())
             .then(setImages)
     }
@@ -28,10 +28,20 @@ export const ImageProvider = (props) => {
     }
 
     const deleteImage = imageId => {
-        return fetch(`http://localhost:8088/images/${imageId}`, {
-            method: "DELETE"
-        })
-            .then(getImages)
+        fetch(`http://localhost:8088/images/${imageId}`, {
+            method: "PATCH",
+                body: JSON.stringify({
+                    deleted: true
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+            })
+            .then(_ => _.json())
+            .then(image => {
+                getImages()
+                return image.id
+             })
     }
 
     useEffect(() => {
