@@ -19,11 +19,8 @@ export default ({ geckoId }) => {
     //make an array of weights for the graph
     let weightArray = []
     let dateLabels = []
-    geckoWeights.forEach(weight => {
-        const date = new Date(weight.weighDate * 1000)
-        const formatter = new Intl.DateTimeFormat('default', { month: 'short', year: 'numeric' })
-        const month = formatter.format(date)
 
+    geckoWeights.forEach(weight => {
         weightArray.push({
             x: weight.weighDate,
             y: weight.weight
@@ -41,32 +38,39 @@ export default ({ geckoId }) => {
     //create the data for the graph
     const graphData = {
         labels: arrayUnique(dateLabels),
-        options: {
-            scales: {
-                xAxes:[{
-                    ticks:{
-                        display: true,
-                        autoSkip: true,
-                        maxTicksLimit: 4
-                    }
-                }]
-            }
-        },
         datasets: [
           {
             label: 'Weight',
             fill: false,
             lineTension: 0.5,
             borderWidth: 2,
-            data: weightArray
+            data: weightArray,
+            backgroundColor: 'rgba(255,209,0,1)',
+            borderColor: 'rgba(255,208,135,1)',
           }
         ]
       }
 
-    console.log(weightArray)
+    const graphOptions = {
+        scales: {
+            xAxes:[{
+                ticks:{
+                    display: true,
+                    autoSkip: true,
+                    maxTicksLimit: 10,
+                    callback: function(value, index, values) {
+                        const date = new Date(value * 1000)
+                        const formatter = new Intl.DateTimeFormat('default', { month: 'short', year: 'numeric' })
+                        const month = formatter.format(date)
+                        return month;
+                    }
+                }
+            }]
+        }
+    }
 
     const weightGraph = (
-        <Line data={graphData} />
+        <Line data={graphData} options={graphOptions} />
     )
 
     const weightTable = (
