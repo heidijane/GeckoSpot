@@ -61,11 +61,25 @@ export default ({ geckoId }) => {
                     callback: function(value, index, values) {
                         const date = new Date(value * 1000)
                         const formatter = new Intl.DateTimeFormat('default', { month: 'short', year: 'numeric' })
-                        const month = formatter.format(date)
-                        return month;
+                        const monthYear = formatter.format(date)
+                        return monthYear;
                     }
                 }
             }]
+        },
+        tooltips: {
+            callbacks: {
+                title: function(tooltipItem, data) {
+                    console.log(tooltipItem)
+                    const date = new Date(tooltipItem[0].xLabel * 1000)
+                    const formatter = new Intl.DateTimeFormat('en-US')
+                    const formattedDate = formatter.format(date)
+                    return formattedDate
+                },
+                label: function(tooltipItems, data) { 
+                    return tooltipItems.yLabel + ' grams';
+                }
+            }
         }
     }
 
