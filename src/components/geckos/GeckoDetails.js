@@ -14,6 +14,7 @@ import SellGeckoForm from "../marketplace/SellGeckoForm"
 import { ListingContext } from "../marketplace/MarketplaceProvider"
 import MyListing from "../marketplace/MyListing"
 import TransferGecko from "./TransferGecko"
+import WeightLog from "../weight/WeightLog"
 
 
 export default ( props ) => {
@@ -129,6 +130,7 @@ export default ( props ) => {
             </section>
             <section className="geckoDetails__rightColumn">
                 <MealLog geckoId={geckoId} addMealModalToggle={addMealModalToggle} setMealObjectToEdit={setMealObjectToEdit} />
+                <WeightLog geckoId={geckoId} />
                 <div className="text-right mt-2">
                 {listing === undefined ? (
                     <Button

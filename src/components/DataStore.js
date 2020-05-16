@@ -4,6 +4,7 @@ import { MealProvider } from "./meals/MealProvider"
 import { ImageProvider } from "./images/ImageProvider"
 import { ListingProvider } from "./marketplace/MarketplaceProvider"
 import { UserProvider } from "./auth/UserProvider"
+import { WeightProvider } from "./weight/WeightProvider"
 
 
 export const DataStore = props => (
@@ -11,9 +12,11 @@ export const DataStore = props => (
         <GeckoProvider>
             <ListingProvider>
                 <MealProvider>
-                    <ImageProvider>
-                        {props.children}
-                    </ImageProvider>
+                    <WeightProvider>
+                        <ImageProvider>
+                            {props.children}
+                        </ImageProvider>
+                    </WeightProvider>
                 </MealProvider>
             </ListingProvider>
         </GeckoProvider>
