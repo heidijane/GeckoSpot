@@ -25,11 +25,11 @@ export default ({ geckoId }) => {
         const month = formatter.format(date)
 
         weightArray.push({
-            x: month,
+            x: weight.weighDate,
             y: weight.weight
         })
 
-        dateLabels.push(month)
+        dateLabels.push(weight.weighDate)
     })
 
     const arrayUnique = (arr) => {
@@ -41,13 +41,22 @@ export default ({ geckoId }) => {
     //create the data for the graph
     const graphData = {
         labels: arrayUnique(dateLabels),
+        options: {
+            scales: {
+                xAxes:[{
+                    ticks:{
+                        display: true,
+                        autoSkip: true,
+                        maxTicksLimit: 4
+                    }
+                }]
+            }
+        },
         datasets: [
           {
             label: 'Weight',
             fill: false,
             lineTension: 0.5,
-            backgroundColor: 'rgba(75,192,192,1)',
-            borderColor: 'rgba(0,0,0,1)',
             borderWidth: 2,
             data: weightArray
           }
