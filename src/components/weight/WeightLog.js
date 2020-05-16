@@ -3,7 +3,8 @@ import { Card, CardHeader, CardBody, Button, Table, Modal, ModalHeader, ModalBod
 import { WeightContext } from "./WeightProvider"
 import { timestampToDateString } from "../../utilities/timestampToString"
 import AddWeightForm from "./AddWeightForm"
-import {Line} from 'react-chartjs-2';
+import {Line} from 'react-chartjs-2'
+import "./WeightLog.css"
 
 export default ({ geckoId }) => {
 
@@ -70,7 +71,6 @@ export default ({ geckoId }) => {
         tooltips: {
             callbacks: {
                 title: function(tooltipItem, data) {
-                    console.log(tooltipItem)
                     const date = new Date(tooltipItem[0].xLabel * 1000)
                     const formatter = new Intl.DateTimeFormat('en-US')
                     const formattedDate = formatter.format(date)
@@ -83,12 +83,14 @@ export default ({ geckoId }) => {
         }
     }
 
+    const reversedWeights = geckoWeights.reverse()
+
     const weightGraph = (
-        <Line data={graphData} options={graphOptions} />
+        <div className="mb-2"><Line data={graphData} options={graphOptions} /></div>
     )
 
     const weightTable = (
-        <Table className="mealLog table-sm table-responsive">
+        <Table className="weightLog table-sm table-responsive">
                     <thead>
                         <tr>
                             <th className="align-middle border-top-0 pr-3">Date</th>
@@ -97,7 +99,7 @@ export default ({ geckoId }) => {
                         </tr>
                     </thead>
                     <tbody>
-                {geckoWeights.map(weight => {
+                {reversedWeights.map(weight => {
                     return (
                         
                             <tr key={"weightrow"+weight.id}>
@@ -134,7 +136,8 @@ export default ({ geckoId }) => {
                 </Button>
             </CardHeader>
             <CardBody>
-                {geckoWeights.length > 0 ? (<>{weightGraph} {weightTable}</>) : "You have not logged your gecko's weight yet."}
+                {geckoWeights.length > 1 ? weightGraph : "" /*only show graph if there are at least 2 data points*/}
+                {geckoWeights.length > 0 ? weightTable : "You have not logged your gecko's weight yet."}
             </CardBody>
         </Card>
 

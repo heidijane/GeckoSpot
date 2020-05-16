@@ -1,18 +1,13 @@
-.mealLog {
+.weightLog {
     max-height: 20vh;
 }
-.mealLog th {
+.weightLog th {
     position: sticky;
     top: 0;
     background-color: white;
 }
-
-.mealLog thead td {
+.weightLog thead td {
     border-top-width: 0;
-}
-
-.highlight {
-    background-color: #fafafa;
 }
 
 .text-nowrap {
