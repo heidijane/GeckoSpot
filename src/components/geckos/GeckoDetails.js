@@ -15,6 +15,7 @@ import { ListingContext } from "../marketplace/MarketplaceProvider"
 import MyListing from "../marketplace/MyListing"
 import TransferGecko from "./TransferGecko"
 import WeightLog from "../weight/WeightLog"
+import AddParentForm from "../family/AddParentForm"
 
 
 export default ( props ) => {
@@ -84,6 +85,10 @@ export default ( props ) => {
     const [transferModal, setTransferModal] = useState(false)
     const transferModalToggle = () => setTransferModal(!transferModal)
 
+    //add parent modal
+    const [parentModal, setParentModal] = useState(false)
+    const parentModalToggle = () => setParentModal(!parentModal)
+
     return (
     <>
         <article className="geckoDetails">
@@ -126,6 +131,13 @@ export default ( props ) => {
                     color="info"
                     onClick={imageUploadToggle}
                     >Add Image</Button>
+                </div>
+                <div className="text-right mt-2">
+                    <Button
+                        className="btn-sm"
+                        color="info"
+                        onClick={parentModalToggle}
+                        >Add Parent</Button>
                 </div>
             </section>
             <section className="geckoDetails__rightColumn">
@@ -231,6 +243,15 @@ export default ( props ) => {
             </ModalHeader>
             <ModalBody>
                 <TransferGecko toggle={listingModalToggle} geckoId={geckoId} setPageState={props.setPageState} />
+            </ModalBody>
+        </Modal>
+
+        <Modal isOpen={parentModal} toggle={parentModalToggle}>
+            <ModalHeader toggle={parentModalToggle}>
+            Add a Parent
+            </ModalHeader>
+            <ModalBody>
+                <AddParentForm toggle={parentModalToggle} geckoId={geckoId} />
             </ModalBody>
         </Modal>
     </>)

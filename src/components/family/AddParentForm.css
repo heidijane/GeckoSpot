@@ -1,0 +1,8 @@
+.parentPreviw__leftColumn {
+    width: 35%;
+}
+
+.parentPreviw__leftColumn .featuredImage_placeholder {
+    min-width: 35%;
+    height: 100px;
+}

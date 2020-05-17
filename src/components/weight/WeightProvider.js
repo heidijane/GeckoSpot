@@ -39,17 +39,6 @@ export const WeightProvider = (props) => {
             .then(getWeights)
     }
 
-    const updateWeight = weight => {
-        return fetch(`http://localhost:8088/geckoWeights/${weight.id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(weight)
-        })
-            .then(getWeights)
-    }
-
     useEffect(() => {
         getWeights()
     }, [])
@@ -60,7 +49,7 @@ export const WeightProvider = (props) => {
 
     return (
         <WeightContext.Provider value={{
-            weights, addWeight, deleteWeight, updateWeight
+            weights, addWeight, deleteWeight
         }}>
             {props.children}
         </WeightContext.Provider>

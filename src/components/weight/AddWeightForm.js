@@ -104,15 +104,20 @@ export default ({ toggle, geckoId }) => {
                     value={defaultDate}
                 />
             </FormGroup>
-            <FormGroup>
+            <FormGroup className="text-right">
                 <Button
                     type="submit"
+                    color="primary"
                     onClick={
                         evt => {
                             evt.preventDefault() // Prevent browser from submitting the form
                             createWeight()
                     }}
                 >Log Weight</Button>
+                <Button
+                    onClick={toggle}
+                    className="ml-2"
+                    >Cancel</Button>
             </FormGroup>
         </Form>
     )

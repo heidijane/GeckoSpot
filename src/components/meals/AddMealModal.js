@@ -250,6 +250,7 @@ export default ({ geckoId, toggleState, toggle, mealObjectToEdit, setMealObjectT
                         </Button>   
                         <Button
                         onClick={toggle}
+                        className="ml-2"
                         >Cancel</Button>   
                     </FormGroup>
                     </Form>
