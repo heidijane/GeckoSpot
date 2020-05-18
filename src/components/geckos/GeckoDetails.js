@@ -104,7 +104,7 @@ export default ( props ) => {
                         <Button className="changeImageButton btn-sm ml-2" onClick={featuredImageToggle}>Change</Button>
                 </div>
                 </div>
-                <div><h1>{currentGecko.name} {currentGecko.sex === 0 ? <img src={require("../../images/icon_female.png")} alt="female" className="genderIcon" /> : <img src={require("../../images/icon_male.png")} alt="male" className="genderIcon" />}</h1></div>
+                <div className="d-flex justify-content-between align-items-center"><h2>{currentGecko.name}</h2><h4>{currentGecko.sex === 0 ? <img src={require("../../images/icon_female.png")} alt="female" className="genderIcon" /> : <img src={require("../../images/icon_male.png")} alt="female" className="genderIcon" />}</h4></div>
                 <div className="geckoMorph">
                 {currentGeckoMorph.colorMorph !== "" ? <Badge className="mr-1">{currentGeckoMorph.colorMorph}</Badge> : ""}
                 {currentGeckoMorph.eyeMorph !== "" && currentGeckoMorph.eyeMorph !== "Normal" ? <Badge className="mr-1">{currentGeckoMorph.eyeMorph}</Badge> : ""}
@@ -115,43 +115,45 @@ export default ( props ) => {
                     <div className="section_header">Hatch Date</div>
                     <div>{currentGecko.hatchDate !== null ? timestampToDateString(currentGecko.hatchDate) : "unknown"}</div>
                 </div>
-                
+
                 <div className="section mt-2">
                     <div className="section_header">Profile</div>
-                    {currentGecko.profile}
+                    {currentGecko.profile !== "" ? currentGecko.profile : <span className="font-italic">none</span>}
                 </div>
-                <div className="text-right mt-2">
+                <div className="mt-2">
                     <Button 
-                    className="btn-sm invert"
+                    className="btn-sm invert btn-block mt-2"
                     outline
                     color="secondary"
                     onClick={editGeckoToggle}
-                    >Edit Gecko Info</Button>
+                    ><img src={require("../../images/icon_edit.png")} alt="change morph"/> Edit Gecko Info</Button>
                     <Button 
-                    className="btn-sm ml-2 invert"
+                    className="btn-sm invert btn-block mt-2"
                     outline
                     color="secondary"
                     onClick={editMorphToggle}
                     ><img src={require("../../images/icon_color.png")} alt="change morph"/> Change Morph</Button>
                 </div>
-                <div className="section text-right mt-2 imageList">
+                <hr />
+                <div className="section imageList">
                     <div className="section_header text-left">Photos</div>
                     <ImageThumbList geckoId={geckoId} currentUser={true} />
                     <Button
-                    className="btn-sm invert"
+                    className="btn-sm invert btn-block mt-2"
                     outline
                     color="secondary"
                     onClick={imageUploadToggle}
                     ><img src={require("../../images/icon_image.png")} alt="add image"/> Add Image</Button>
                 </div>
+                <hr />
                 <div className="section">
                     <div className="section_header">Family</div>
                     <FamilyTree geckoId={geckoId} />
                 </div>
                 
-                <div className="text-right mt-2">
+                <div className="mt-2">
                     <Button
-                        className="btn-sm invert"
+                        className="btn-sm invert btn-block mt-2"
                         outline
                         color="secondary"
                         onClick={parentModalToggle}
@@ -161,7 +163,7 @@ export default ( props ) => {
             <section className="geckoDetails__rightColumn">
                 <MealLog geckoId={geckoId} addMealModalToggle={addMealModalToggle} setMealObjectToEdit={setMealObjectToEdit} />
                 <WeightLog geckoId={geckoId} />
-                <div className="text-right mt-2">
+                <div className="mt-2 text-right">
                 {listing === undefined ? (
                     <Button
                     color="success"
@@ -231,7 +233,7 @@ export default ( props ) => {
                 Choose an image
             </ModalHeader>
             <ModalBody>
-                <div className="text-right mt-2 imageList larger">
+                <div className="mt-2 imageList larger">
                     <ImageThumbList geckoId={geckoId} currentUser={true} />
                 </div>
             </ModalBody>

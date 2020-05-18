@@ -70,7 +70,7 @@ export default ({ geckoId, addMealModalToggle, setMealObjectToEdit }) => {
                     className="btn-sm float-right"
                     onClick={addMealModalToggle}
                     >
-                        <img src={require("../../images/icon_cricket.png")} alt="change morph"/> Add New Meal
+                        <img src={require("../../images/icon_cricket.png")} alt="add meal"/> Add New Meal
                 </Button>
             </CardHeader>
             <CardBody>

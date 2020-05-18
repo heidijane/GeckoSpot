@@ -85,6 +85,36 @@ body {
     font-size: 1.15em;
 }
 
+/*Button adjustments*/
+
+.btn.btn-primary {
+    border-color: #f17539;
+    background-color: #f17539;
+}
+.btn.btn-primary:hover {
+    border-color: #da5f25;
+    background-color: #da5f25;
+}
+.btn.btn-primary:active {
+    border-color: #d2581e;
+    background-color: #d2581e;
+}
+.btn.btn-primary:active {
+    border-color: #d2581e !important;
+    background-color: #d2581e !important;
+}
+.btn-primary:not(:disabled):not(.disabled).active {
+    border-color: #d2581e !important;
+    background-color: #d2581e !important;
+}
+.btn.btn-primary:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #d2581e !important;
+    background-color: #d2581e !important;
+}
+
+
 .btn img {
     vertical-align: middle;
     margin-top:-1px;
@@ -107,6 +137,11 @@ body {
 .btn-sm img {
     position:relative;
     top:-1px;
+    max-height:24px;
+}
+
+.btn-outline-secondary {
+    border-color: rgb(206, 206, 206);
 }
 
 @keyframes wiggle {

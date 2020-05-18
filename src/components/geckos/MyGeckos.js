@@ -24,8 +24,8 @@ export default ({ setPageState, setGeckoDetailsId }) => {
             <div className="page__navBar text-right">
                 <h4>My Geckos</h4>
                 <div className="text-right">
-                    <Button onClick={addGeckoToggle} color="primary">Add Gecko</Button>
-                    <Button onClick={addMealModalToggle} color="primary" className="ml-2">Log a Meal</Button>
+                    <Button onClick={addGeckoToggle} color="primary"><img src={require("../../images/icon_hatch.png")} alt="add gecko"/> Add Gecko</Button>
+                    <Button onClick={addMealModalToggle} color="primary" className="ml-2"><img src={require("../../images/icon_cricket.png")} alt="add meal"/> Log a Meal</Button>
                 </div>
             </div>
             
