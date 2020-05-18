@@ -56,7 +56,7 @@ export default ( { setPageState } ) => {
         <>
             <div className="page__navBar text-right">
                 <div className="d-flex justify-content-start align-items-center">
-                    <h4>My Geckos</h4>
+                    <h4>Marketplace</h4>
                     <ButtonGroup className="ml-2">
                         <Button color="primary" onClick={() => setRSelected("all")} active={rSelected === "all"}>All Listings</Button>
                         <Button color="primary" onClick={() => setRSelected("currentUser")} active={rSelected === "currentUser"}>My Listings</Button>

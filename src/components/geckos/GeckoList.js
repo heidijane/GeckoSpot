@@ -19,7 +19,7 @@ export default ({ setPageState, setGeckoDetailsId }) => {
 
     if (userGeckos.length > 0) {
         return (
-            <section className="geckoList">
+            <section className="geckoList page_container">
                 {userGeckos.map(gecko => {
                     //get featured image for gecko
                     const featuredImage = images.find(image => image.id === gecko.imageId)

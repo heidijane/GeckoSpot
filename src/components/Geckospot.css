@@ -45,6 +45,15 @@ body {
     outline: 0;
 }
 
+.page_outerWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.page_innerWrapper {
+    width: 90%;
+}
+
 .page__navBar {
     background-color: rgba(255, 253, 248, 0.9);
     border: 1px solid #e9e9e9;
@@ -52,7 +61,22 @@ body {
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
     padding: 1em;
-    margin: 1em 1em 0 1em;
+    margin: 0;
     display: flex;
     justify-content: space-between;
+}
+
+.page_container {
+    background-color: rgba(255, 253, 248, 0.9);
+    border: 1px solid #e9e9e9;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    padding: 1em;
+    margin: 0;
+}
+
+@media only screen and (max-width: 500px) {
+    .page_innerWrapper {
+        width: 100%;
+    }
 }

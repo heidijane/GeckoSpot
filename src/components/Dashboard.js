@@ -36,10 +36,12 @@ export default ({logout}) => {
     }, [pageState])
 
     return (
-        <>
-            <NavBar setPageState={setPageState} logout={logout} />
+        <div className="page_outerWrapper">
+            <div className="page_innerWrapper">
+            <NavBar currentPage={pageState} setPageState={setPageState} logout={logout} />
             <DataStore>{components}</DataStore>
-        </>
+            </div>
+        </div>
         )
 }
 

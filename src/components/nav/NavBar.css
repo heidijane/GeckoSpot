@@ -41,3 +41,7 @@
 .navLink:active {
     background-color: #f19b4b;
 }
+
+.navLink.currentPage {
+    background-color: #f19b4b;
+}

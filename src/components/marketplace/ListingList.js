@@ -15,7 +15,7 @@ export default ( {listings, setGeckoDetailId, myListingModal, listingDetailsModa
 
     if (listings.length > 0) {
         return (
-            <section className="geckoList">
+            <section className="geckoList page_container">
                 {listings.map(listing => {
                     //get gecko info for the listing
                     const gecko = geckos.find(gecko => gecko.id === listing.geckoId)
@@ -76,7 +76,7 @@ export default ( {listings, setGeckoDetailId, myListingModal, listingDetailsModa
             </section>
             )
     } else {
-        return (<section className="geckoList">There are no geckos up for sale at the moment.</section>)
+        return (<section className="page_container">There are no geckos up for sale at the moment.</section>)
     }
 
     

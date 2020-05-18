@@ -92,7 +92,7 @@ export default ( props ) => {
 
     return (
     <>
-        <article className="geckoDetails">
+        <article className="geckoDetails page_container">
             <section className="geckoDetails__leftColumn">
                 <div className="d-flex justify-content-center">
                 <div className="featuredImage_wrapper">
