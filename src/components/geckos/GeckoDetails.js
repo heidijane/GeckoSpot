@@ -104,42 +104,58 @@ export default ( props ) => {
                         <Button className="changeImageButton btn-sm ml-2" onClick={featuredImageToggle}>Change</Button>
                 </div>
                 </div>
-                <div><h1>{currentGecko.name}</h1></div>
-                <div className="geckoDetails__hatchDateAndSex">
-                    <div className="geckoDetails__hatchDate"><img src={require("../../images/icon_hatch.png")} alt="hatch date" title="hatch date" />{currentGecko.hatchDate !== null ? timestampToDateString(currentGecko.hatchDate) : "unknown"}</div>
-                    <div className="geckoDetails__sex">{currentGecko.sex === 0 ? <img src={require("../../images/icon_female.png")} alt="female" /> : <img src={require("../../images/icon_male.png")} alt="male" />}</div>
+                <div><h1>{currentGecko.name} {currentGecko.sex === 0 ? <img src={require("../../images/icon_female.png")} alt="female" className="genderIcon" /> : <img src={require("../../images/icon_male.png")} alt="male" className="genderIcon" />}</h1></div>
+                <div className="geckoMorph">
+                {currentGeckoMorph.colorMorph !== "" ? <Badge className="mr-1">{currentGeckoMorph.colorMorph}</Badge> : ""}
+                {currentGeckoMorph.eyeMorph !== "" && currentGeckoMorph.eyeMorph !== "Normal" ? <Badge className="mr-1">{currentGeckoMorph.eyeMorph}</Badge> : ""}
+                {currentGeckoMorph.sizeMorph !== "" && currentGeckoMorph.sizeMorph !== "Normal" ? <Badge>{currentGeckoMorph.sizeMorph}</Badge> : ""}
                 </div>
-                <div>{currentGecko.profile}</div>
-                    {currentGeckoMorph.colorMorph !== "" ? <Badge className="mr-1">{currentGeckoMorph.colorMorph}</Badge> : ""}
-                    {currentGeckoMorph.eyeMorph !== "" && currentGeckoMorph.eyeMorph !== "Normal" ? <Badge className="mr-1">{currentGeckoMorph.eyeMorph}</Badge> : ""}
-                    {currentGeckoMorph.sizeMorph !== "" && currentGeckoMorph.sizeMorph !== "Normal" ? <Badge>{currentGeckoMorph.sizeMorph}</Badge> : ""}
+                
+                <div className="section mt-2">
+                    <div className="section_header">Hatch Date</div>
+                    <div>{currentGecko.hatchDate !== null ? timestampToDateString(currentGecko.hatchDate) : "unknown"}</div>
+                </div>
+                
+                <div className="section mt-2">
+                    <div className="section_header">Profile</div>
+                    {currentGecko.profile}
+                </div>
                 <div className="text-right mt-2">
                     <Button 
-                    className="btn-sm"
-                    color="info"
+                    className="btn-sm invert"
+                    outline
+                    color="secondary"
                     onClick={editGeckoToggle}
                     >Edit Gecko Info</Button>
                     <Button 
-                    className="btn-sm ml-2"
-                    color="info"
+                    className="btn-sm ml-2 invert"
+                    outline
+                    color="secondary"
                     onClick={editMorphToggle}
-                    >Change Morph</Button>
+                    ><img src={require("../../images/icon_color.png")} alt="change morph"/> Change Morph</Button>
                 </div>
-                <div className="text-right mt-2 imageList">
+                <div className="section text-right mt-2 imageList">
+                    <div className="section_header text-left">Photos</div>
                     <ImageThumbList geckoId={geckoId} currentUser={true} />
                     <Button
-                    className="btn-sm"
-                    color="info"
+                    className="btn-sm invert"
+                    outline
+                    color="secondary"
                     onClick={imageUploadToggle}
-                    >Add Image</Button>
+                    ><img src={require("../../images/icon_image.png")} alt="add image"/> Add Image</Button>
                 </div>
-                <FamilyTree geckoId={geckoId} />
+                <div className="section">
+                    <div className="section_header">Family</div>
+                    <FamilyTree geckoId={geckoId} />
+                </div>
+                
                 <div className="text-right mt-2">
                     <Button
-                        className="btn-sm"
-                        color="info"
+                        className="btn-sm invert"
+                        outline
+                        color="secondary"
                         onClick={parentModalToggle}
-                        >Add Parent</Button>
+                        ><img src={require("../../images/icon_family.png")} alt="change morph"/> Update Parents</Button>
                 </div>
             </section>
             <section className="geckoDetails__rightColumn">

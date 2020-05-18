@@ -3,12 +3,6 @@
     src: url("../../fonts/Sniglet-ExtraBold.otf");
 }
 
-@font-face {
-    font-family: "SnigletLight";
-    src: url("../../fonts/Sniglet-Regular.otf");
-}
-
-
 #navigation {
     border: solid 1px #FFBA91;
     background-color: #ffd087;
@@ -19,17 +13,18 @@
     font-family: Sniglet, sans-serif;
     font-size: 2em;
     letter-spacing: 2px;
-    padding: .15em;
+    padding: .15em .25em .15em .25em;
+    color: #c56b17;
 }
 
 .navLink {
-    font-family: SnigletLight, sans-serif;
     border: 1px solid #e6ac61;
     border-top-width: 0;
     border-bottom-width: 0;
     cursor: pointer;
+    font-weight: bold;
     font-size: 1.05em;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 1px;
     padding: 1em;
 }

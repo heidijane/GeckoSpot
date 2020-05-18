@@ -32,6 +32,11 @@
     margin-top: -3px;
 }
 
+.geckoMorph {
+    font-size: 1.05em;
+    margin-top:-10px;
+}
+
 @media only screen and (max-width: 580px) {
     .geckoCard {
         flex-basis: 100%;

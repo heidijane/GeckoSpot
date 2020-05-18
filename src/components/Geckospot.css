@@ -21,7 +21,7 @@
 
 body {
     background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("../images/gecko_background.png");
-    background-size: 40%;
+    background-size: 25%;
     font-family: Karla, sans-serif;
 }
 
@@ -73,6 +73,48 @@ body {
     border-bottom-left-radius: 4px;
     padding: 1em;
     margin: 0;
+}
+
+.card-header {
+    background-color: #e9e9d270;
+    font-size: 1.15em;
+}
+
+.modal-header {
+    background-color: #e9e9d270;
+    font-size: 1.15em;
+}
+
+.btn img {
+    vertical-align: middle;
+    margin-top:-1px;
+    image-rendering: crisp-edges;
+}
+
+.btn.invert img {
+    opacity: 0.5; 
+}
+
+.btn:hover img {
+    animation: wiggle .6s 1;
+}
+
+.btn:hover.invert img {
+    opacity: 1;
+    filter: invert(100%);
+}
+
+.btn-sm img {
+    position:relative;
+    top:-1px;
+}
+
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+   25% { transform: rotate(10deg); }
+   50% { transform: rotate(-10deg); }
+   75% { transform: rotate(10deg); }
+  100% { transform: rotate(0deg); }
 }
 
 @media only screen and (max-width: 500px) {

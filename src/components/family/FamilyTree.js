@@ -85,7 +85,7 @@ export default ( {geckoId} ) => {
             //get gecko profile image
             const featuredImage = images.find(image => image.id === geckoObj.imageId)
             return (
-                <div key={"relWrap_"+geckoObj.id}>
+                <div key={"relWrap_"+geckoObj.id} className="mx-1">
                 <div key={"rel_"+geckoObj.id} className="family-icon">
                     {geckoObj.imageId === 0 || geckoObj.imageId === null ? (
                         <div className="featuredImage featuredImage_placeholder"></div>
@@ -98,7 +98,7 @@ export default ( {geckoId} ) => {
             )
         } else {
             return (
-                <div key={"relWrap_"+unknownId.next().value}>
+                <div key={"relWrap_"+unknownId.next().value} className="mx-1">
                 <div key={"rel_"+unknownId.next().value} className="family-icon">
                         <div className="featuredImage featuredImage_placeholder"></div>
                     </div>
@@ -116,28 +116,27 @@ export default ( {geckoId} ) => {
 
     return (
         <div className="text-center">
-            <h3>Family</h3>
-                <div className="mb-2">
-                    <h5>Parents</h5>
-                    <div className="d-flex flex-wrap justify-content-around">
+                <div className="mb-3">
+                    <div className="section_header">Parents</div>
+                    <div className="d-flex flex-wrap justify-content-center">
                         {famCircle(mother)}
                         {famCircle(father)}
                     </div>
                 </div>
 
             {Array.isArray(siblings) && siblings.length ? (
-                <div className="mb-2">
-                    <h5>{pluralize("Siblings", siblings.length)}</h5>
-                    <div className="d-flex flex-wrap justify-content-around">
+                <div className="mb-3">
+                    <div className="section_header">{pluralize("Siblings", siblings.length)}</div>
+                    <div className="d-flex flex-wrap justify-content-center">
                         {siblings.map(geckObj => famCircle(geckObj))}
                     </div>
                 </div>
                 ) : ""
             }
             {Array.isArray(mates) && mates.length ? (
-                <div className="mb-2">
-                    <h5>{pluralize("Mate", mates.length)}</h5>
-                    <div className="d-flex flex-wrap justify-content-around">
+                <div className="mb-3">
+                    <div className="section_header">{pluralize("Mate", mates.length)}</div>
+                    <div className="d-flex flex-wrap justify-content-center">
                         {mates.map(geckObj => famCircle(geckObj))}
                     </div>
                 </div>
@@ -145,8 +144,8 @@ export default ( {geckoId} ) => {
             }
             {Array.isArray(children) && children.length ? (
                 <div>
-                    <h5>{pluralize("Child", children.length)}</h5>
-                    <div className="d-flex flex-wrap justify-content-around">
+                    <div className="section_header">{pluralize("Child", children.length)}</div>
+                    <div className="d-flex flex-wrap justify-content-center">
                         {children.map(geckObj => famCircle(geckObj))}
                     </div>
                 </div>

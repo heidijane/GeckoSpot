@@ -132,7 +132,7 @@ export default ({ geckoId }) => {
                     className="btn-sm float-right"
                     onClick={addWeightModalToggle}
                     >
-                        Log Weight
+                        <img src={require("../../images/icon_scale.png")} alt="change morph"/> Log Weight
                 </Button>
             </CardHeader>
             <CardBody>
