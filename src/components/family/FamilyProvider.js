@@ -26,11 +26,11 @@ export const FamilyProvider = (props) => {
              })
     }
 
-    const deleteParent = parentId => {
-        return fetch(`http://localhost:8088/geckoParents/${parentId}`, {
+    const updateParent = rel => {
+        return fetch(`http://localhost:8088/geckoParents/${rel.id}`, {
             method: "PATCH",
                 body: JSON.stringify({
-                    deleted: true
+                    parentId: rel.parentId
             }),
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
@@ -44,12 +44,12 @@ export const FamilyProvider = (props) => {
     }, [])
 
     useEffect(() => {
-        console.log("****  WEIGHT LOG APPLICATION STATE CHANGED  ****")
+        console.log("****  PARENT LOG APPLICATION STATE CHANGED  ****")
     }, [parents])
 
     return (
         <FamilyContext.Provider value={{
-            parents, addParent, deleteParent
+            parents, addParent, updateParent
         }}>
             {props.children}
         </FamilyContext.Provider>

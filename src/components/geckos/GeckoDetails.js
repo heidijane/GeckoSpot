@@ -16,6 +16,7 @@ import MyListing from "../marketplace/MyListing"
 import TransferGecko from "./TransferGecko"
 import WeightLog from "../weight/WeightLog"
 import AddParentForm from "../family/AddParentForm"
+import FamilyTree from "../family/FamilyTree"
 
 
 export default ( props ) => {
@@ -132,6 +133,7 @@ export default ( props ) => {
                     onClick={imageUploadToggle}
                     >Add Image</Button>
                 </div>
+                <FamilyTree geckoId={geckoId} />
                 <div className="text-right mt-2">
                     <Button
                         className="btn-sm"

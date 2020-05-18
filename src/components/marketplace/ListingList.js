@@ -56,7 +56,7 @@ export default ( {listings, setGeckoDetailId, myListingModal, listingDetailsModa
                             ): (
                                 <CardImg top width="100%" src={featuredImage.imageURL} className="geckoCard__image" />
                             )}                            
-                            <CardTitle className="geckoCard__title">{gecko.name}</CardTitle>
+                            <CardTitle className="geckoCard__title d-flex justify-content-between mx-2"><div>{gecko.name}</div> <div>{gecko.sex === 0 ? <img src={require("../../images/icon_female.png")} alt="female" className="genderIcon" /> : <img src={require("../../images/icon_male.png")} alt="male" className="genderIcon" />}</div></CardTitle>
                             <div className="m-2 mt-n3">
                                 <div>
                                     {geckoMorph.colorMorph !== "" ? <Badge className="mr-1">{geckoMorph.colorMorph}</Badge> : ""}

@@ -6,3 +6,8 @@
     min-width: 35%;
     height: 100px;
 }
+
+.genderIcon {
+    height:.8em;
+    margin-top: -3px;
+}

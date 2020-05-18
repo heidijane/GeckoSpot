@@ -1,17 +1,21 @@
 import React, { useContext, useRef, useState } from "react"
-import { Form, FormGroup, Input, Label, Button } from "reactstrap"
+import { Form, FormGroup, Input, Label, Button, Badge } from "reactstrap"
 import { GeckoContext } from "../geckos/GeckoProvider"
 import { ImageContext } from "../images/ImageProvider"
 import "./AddParentForm.css"
 import { UserContext } from "../auth/UserProvider"
+import { timestampToDateString } from "../../utilities/timestampToString"
+import { FamilyContext } from "./FamilyProvider"
 
 export default ({ geckoId, toggle }) => {
 
     const { geckos } = useContext(GeckoContext)
     const { images } = useContext(ImageContext)
     const { users } = useContext(UserContext)
+    const { parents, addParent, updateParent } = useContext(FamilyContext)
 
     const currentUserId = parseInt(sessionStorage.getItem("activeUser"))
+    const currentGeckoObject = geckos.find(gecko => gecko.id === geckoId)
 
     //remove current gecko from the list
     const filteredGeckos = geckos.filter(gecko => {
@@ -22,23 +26,81 @@ export default ({ geckoId, toggle }) => {
         }
     })
 
+    //get list of male geckos
+    const maleGeckos = filteredGeckos.filter(gecko => gecko.sex === 1)
+    //get list of female geckos
+    const femaleGeckos = filteredGeckos.filter(gecko => gecko.sex === 0)
+
+    //get gecko's current parents
+    const parentRelationships = parents.filter(parent => parent.geckoId === geckoId)
+    //match relationship up with gecko object
+    const geckoParents = parentRelationships.map(rel => {
+        const matchedGecko = geckos.find(gecko => gecko.id === rel.parentId)
+        if (matchedGecko !== undefined) {
+            matchedGecko.relId = rel.id
+            return matchedGecko
+        } else {
+            return {relId: rel.id, id: 0}
+        }
+    })
+    
+    //assign a mother/father value to the relationship if they are set as unknown
+    geckoParents.forEach(parent => {
+        if (parent.sex === undefined && !geckoParents.some(par => par.sex === 0)) {
+            parent.sex = 0
+        } else if (parent.sex === undefined && !geckoParents.some(par => par.sex === 1)) {
+            parent.sex = 1
+        }
+    })
+    
+    const geckoMother = geckoParents.find(gecko => gecko.sex === 0)
+    const geckoFather = geckoParents.find(gecko => gecko.sex === 1)
+
     //sort the list alphabetically by name
     filteredGeckos.sort((a, b) => (a.name > b.name) ? 1 : -1)
 
-    //state of the parent preview box
-    const [previewId, setPreviewId] = useState(0)
+    //state of the parent preview boxes
+    const [motherPreviewId, setMotherPreviewId] = useState(geckoMother !== undefined ? geckoMother.id : 0)
+    const [fatherPreviewId, setFatherPreviewId] = useState(geckoFather !== undefined ? geckoFather.id : 0)
 
-    const parentId = useRef()
+    const motherId = useRef()
+    const fatherId = useRef()
 
     const createParent = () => {
-        const parsedParentId = parseInt(parentId.current.value)
+        const parsedMotherId = parseInt(motherId.current.value)
+        const parsedFatherId = parseInt(fatherId.current.value)
 
-        //check to make sure that chosen gecko exists
-        if (geckos.some(gecko => gecko.id === parsedParentId)) {
-
+        //add/update mother gecko
+        //determine if row needs to be updated or added
+        if (geckoMother === undefined && !geckoParents.some(par => par.sex === 0)) {
+            //add new row
+            addParent({
+                geckoId: geckoId,
+                parentId: parsedMotherId
+            })
         } else {
-            window.alert("There are no geckos with this name currently registered.")
+            //update row
+            const objToUpdate = geckoParents.find(gecko => gecko.sex === 0)
+            updateParent({
+                id: objToUpdate.relId,
+                parentId: parsedMotherId
+            })
         }
+        if (geckoFather === undefined && !geckoParents.some(par => par.sex === 1)) {
+            //add new row
+            addParent({
+                geckoId: geckoId,
+                parentId: parsedFatherId
+            })
+        } else {
+            //update row
+            const objToUpdate = geckoParents.find(gecko => gecko.sex === 1)
+            updateParent({
+                id: objToUpdate.relId,
+                parentId: parsedFatherId
+            })
+        }
+        toggle()
     }
 
     const showPreview = (geckoId) => {
@@ -50,6 +112,20 @@ export default ({ geckoId, toggle }) => {
         //get user info for gecko preview
         const ownerObj = users.find(user => user.id === previewGeckoObject.userId)
 
+        //get morph info if available
+        let geckoMorph = {}
+        if (previewGeckoObject.geckoMorphs[0] === undefined) {
+            geckoMorph = {
+                id: null,
+                geckoId: previewGeckoObject.id,
+                colorMorph: "",
+                eyeMorph: "",
+                sizeMorph: ""
+            }
+        } else {
+            geckoMorph = previewGeckoObject.geckoMorphs[0]
+        }
+
         return (
             <div className="parentPreview d-flex">
                 <div className="parentPreviw__leftColumn">
@@ -59,9 +135,17 @@ export default ({ geckoId, toggle }) => {
                     <img src={featuredImage.imageURL} className="featuredImage img-thumbnail" alt="" />
                 )}
                 </div>
-                <div>
-                <h5>{previewGeckoObject.name}</h5>
-                <p>owned by {ownerObj.id === currentUserId ? "you" : ownerObj.username}</p>
+                <div className="ml-2">
+                <h5>{previewGeckoObject.name} {previewGeckoObject.sex === 0 ? <img src={require("../../images/icon_female.png")} alt="female" className="genderIcon" /> : <img src={require("../../images/icon_male.png")} alt="male" className="genderIcon" />}</h5>
+                <div className="mt-n2">
+                    {geckoMorph.colorMorph !== "" ? <Badge className="mr-1">{geckoMorph.colorMorph}</Badge> : ""}
+                    {geckoMorph.eyeMorph !== "" && geckoMorph.eyeMorph !== "Normal" ? <Badge className="mr-1">{geckoMorph.eyeMorph}</Badge> : ""}
+                    {geckoMorph.sizeMorph !== "" && geckoMorph.sizeMorph !== "Normal" ? <Badge>{geckoMorph.sizeMorph}</Badge> : ""}
+                </div>
+                <p>hatched on {timestampToDateString(previewGeckoObject.hatchDate)}<br />
+                owned by {ownerObj.id === currentUserId ? "you" : ownerObj.username}             
+                </p>
+                <p></p>
                 </div>
             </div>
         )
@@ -70,22 +154,41 @@ export default ({ geckoId, toggle }) => {
     return (
         <Form>
             <FormGroup>
-                <Label for="parentId">Select a parent...</Label>
+    <Label for="motherId">{currentGeckoObject.name}'s Mother</Label>
                 <Input
                     type="select"
-                    innerRef={parentId}
-                    name="parentId"
-                    id="parentId"
-                    placeholder="parent name"
-                    onChange={event => setPreviewId(parseInt(event.target.value))}
+                    innerRef={motherId}
+                    name="motherId"
+                    id="motherId"
+                    defaultValue={geckoMother !== undefined ? geckoMother.id : 0}
+                    onChange={event => setMotherPreviewId(parseInt(event.target.value))}
                 >   
-                    <option key={"parent_default"} value="0">Please select...</option>
-                    {filteredGeckos.map(parent => {
-                        return <option key={"parent_"+parent.id} value={parent.id}>{parent.name}</option>
+                    <option key={"mother_default"} value="0">Unknown</option>
+                    {femaleGeckos.map(parent => {
+                        return <option key={"mother_"+parent.id} value={parent.id}>{parent.name}</option>
                     })}
                 </Input>
             </FormGroup>
-            {previewId !== 0 ? showPreview(previewId) : ""}
+            {motherPreviewId !== 0 ? showPreview(motherPreviewId) : ""}
+
+
+            <FormGroup>
+                <Label for="fatherId">{currentGeckoObject.name}'s Father</Label>
+                <Input
+                    type="select"
+                    innerRef={fatherId}
+                    name="fatherId"
+                    id="fatherId"
+                    defaultValue={geckoFather !== undefined ? geckoFather.id : 0}
+                    onChange={event => setFatherPreviewId(parseInt(event.target.value))}
+                >   
+                    <option key={"father_default"} value="0">Unknown</option>
+                    {maleGeckos.map(parent => {
+                        return <option key={"father_"+parent.id} value={parent.id}>{parent.name}</option>
+                    })}
+                </Input>
+            </FormGroup>
+            {fatherPreviewId !== 0 ? showPreview(fatherPreviewId) : ""}
             <FormGroup className="text-right mt-2">
                 <Button
                     type="submit"
@@ -93,10 +196,10 @@ export default ({ geckoId, toggle }) => {
                     onClick={
                         evt => {
                             evt.preventDefault() // Prevent browser from submitting the form
-                            
+                            createParent()
                         }
                     }
-                >Add Parent</Button>
+                >Save</Button>
                 <Button
                     onClick={toggle}
                     className="ml-2"
