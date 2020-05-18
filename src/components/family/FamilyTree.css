@@ -1,0 +1,17 @@
+.family-icon {
+    clip-path: circle(50px at center);
+    overflow: hidden;
+    height:100px;
+    width: 100px;
+}
+.family-icon img {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+}
+
+.family-icon .featuredImage_placeholder {
+    min-width:100px;
+    width:100%;
+    height: 100px;
+}

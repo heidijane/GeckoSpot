@@ -2,6 +2,8 @@ import React, { useContext } from "react"
 import { GeckoContext } from "../geckos/GeckoProvider"
 import { ImageContext } from "../images/ImageProvider"
 import { FamilyContext } from "./FamilyProvider"
+import "./FamilyTree.css"
+var pluralize = require('pluralize')
 
 export default ( {geckoId} ) => {
     const { geckos } = useContext(GeckoContext)
@@ -24,13 +26,13 @@ export default ( {geckoId} ) => {
             geckoFamily.push(matchedGecko)
             return matchedGecko
         } else {
-            return false
+            return undefined
         }
     })
 
     //get the siblings
     parentRelationships.forEach(parent => {
-        const parentChildren = parents.filter(rel => rel.parentId === parent.parentId)
+        const parentChildren = parents.filter(rel => rel.parentId === parent.parentId && rel.parentId !== 0)
             parentChildren.forEach(rel => {
                 const matchedGecko = geckos.find(gecko => gecko.id === rel.geckoId)
                 matchedGecko.relationship = "sibling"
@@ -69,12 +71,86 @@ export default ( {geckoId} ) => {
     geckoFamily = geckoFamily.filter(gecko => gecko.id !== geckoId)
     geckoFamily = arrayUnique(geckoFamily)
 
+    //auto increment key generator for unknown parents
+    function* autoIncrement() {
+        var index = 1
+        while (true)
+            yield index++
+    }
+    let unknownId = autoIncrement()
+
+    //outputs a cirlce with a gecko's profile image and name/gender
+    const famCircle = (geckoObj) => {
+        if (geckoObj !== undefined) {
+            //get gecko profile image
+            const featuredImage = images.find(image => image.id === geckoObj.imageId)
+            return (
+                <div key={"relWrap_"+geckoObj.id}>
+                <div key={"rel_"+geckoObj.id} className="family-icon">
+                    {geckoObj.imageId === 0 || geckoObj.imageId === null ? (
+                        <div className="featuredImage featuredImage_placeholder"></div>
+                    ): (
+                        <img src={featuredImage.imageURL} className="featuredImage" alt="" />
+                    )}
+                    </div>
+                    {geckoObj.name} {geckoObj.sex === 0 ? <img src={require("../../images/icon_female.png")} alt="female" className="genderIcon" /> : <img src={require("../../images/icon_male.png")} alt="male" className="genderIcon" />}
+                </div>
+            )
+        } else {
+            return (
+                <div key={"relWrap_"+unknownId.next().value}>
+                <div key={"rel_"+unknownId.next().value} className="family-icon">
+                        <div className="featuredImage featuredImage_placeholder"></div>
+                    </div>
+                    Unknown
+                </div>
+            )
+        }
+    }
+
+    const mother = geckoFamily.find(geckObj => geckObj.relationship === "mother")
+    const father = geckoFamily.find(geckObj => geckObj.relationship === "father")
+    const siblings = geckoFamily.filter(geckObj => geckObj.relationship === "sibling")
+    const children = geckoFamily.filter(geckObj => geckObj.relationship === "child")
+    const mates = geckoFamily.filter(geckObj => geckObj.relationship === "mate")
+
     return (
-        <div>
-            {
-                geckoFamily.map(fam => {
-                    return <p key={"rel_"+fam.id}>{fam.name} - {fam.relationship}</p>
-                })
+        <div className="text-center">
+            <h3>Family</h3>
+                <div className="mb-2">
+                    <h5>Parents</h5>
+                    <div className="d-flex flex-wrap justify-content-around">
+                        {famCircle(mother)}
+                        {famCircle(father)}
+                    </div>
+                </div>
+
+            {Array.isArray(siblings) && siblings.length ? (
+                <div className="mb-2">
+                    <h5>{pluralize("Siblings", siblings.length)}</h5>
+                    <div className="d-flex flex-wrap justify-content-around">
+                        {siblings.map(geckObj => famCircle(geckObj))}
+                    </div>
+                </div>
+                ) : ""
+            }
+            {Array.isArray(mates) && mates.length ? (
+                <div className="mb-2">
+                    <h5>{pluralize("Mate", mates.length)}</h5>
+                    <div className="d-flex flex-wrap justify-content-around">
+                        {mates.map(geckObj => famCircle(geckObj))}
+                    </div>
+                </div>
+                ) : ""
+            }
+            {Array.isArray(children) && children.length ? (
+                <div>
+                    <h5>{pluralize("Child", children.length)}</h5>
+                    <div className="d-flex flex-wrap justify-content-around">
+                        {children.map(geckObj => famCircle(geckObj))}
+                    </div>
+                </div>
+                ) : ""
             }
         </div>
     )
