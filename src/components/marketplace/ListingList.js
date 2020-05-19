@@ -63,7 +63,10 @@ export default ( {listings, setGeckoDetailId, myListingModal, listingDetailsModa
                                     {geckoMorph.eyeMorph !== "" && geckoMorph.eyeMorph !== "Normal" ? <Badge className="mr-1">{geckoMorph.eyeMorph}</Badge> : ""}
                                     {geckoMorph.sizeMorph !== "" && geckoMorph.sizeMorph !== "Normal" ? <Badge>{geckoMorph.sizeMorph}</Badge> : ""}
                                 </div>
-                                <div>{truncate(listing.listingNotes)}</div>
+                                <div className="section mt-2">
+                                    <div className="section_header d-inline mr-1">Notes</div>
+                                    <div>{listing.listingNotes !== "" ? truncate(listing.listingNotes) : <span className="font-italic">None</span>}</div>
+                                </div>
                                 
                             </div>
                             <div className="pricetag">

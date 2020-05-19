@@ -18,10 +18,6 @@
     padding: .15em .4em .15em .4em;
 }
 
-.navLogo img {
-    filter: sepia(10%) contrast(90%);
-}
-
 .navLink {
     border: 1px solid #e6ac61;
     border-top-width: 0;

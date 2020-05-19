@@ -63,7 +63,7 @@ export default ( { setPageState } ) => {
                     </ButtonGroup>
                 </div>
             
-                <Button onClick={sellGeckoModalToggle} color="success" className="ml-2">Sell a Gecko</Button>
+                <Button onClick={sellGeckoModalToggle} color="success" className="ml-2"><img src={require("../../images/icon_sell.png")} alt="sell gecko"/> Sell a Gecko</Button>
             </div>
             <ListingList listings={geckoList} setGeckoDetailId={setGeckoDetailId} myListingModal={myListingModalToggle} listingDetailsModal={listingDetailsModalToggle} />
             <Modal isOpen={sellGeckoModal} toggle={sellGeckoModalToggle} backdrop={"static"}>

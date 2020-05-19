@@ -62,7 +62,7 @@ export default ( {geckoId, toggle, setPageState} ) => {
                     //get username of buyer
                     const userInfo = users.find(user => user.id === buyer.buyerId)
                     return (
-                    <ListGroupItem key={"buyer_"+buyer.buyerId}>{userInfo.username} 
+                    <ListGroupItem key={"buyer_"+buyer.buyerId} className="d-flex flex-wrap justify-content-between">{userInfo.username} 
                             <a href={"mailto:"+userInfo.email}>{userInfo.email}</a>
                             <CopyToClipboard 
                             text={userInfo.email}

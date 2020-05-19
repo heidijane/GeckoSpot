@@ -16,6 +16,10 @@
     transform: scale(1.01);
 }
 
+.geckoCard:hover .pricetag {
+    animation: jiggle .6s 1;
+}
+
 .geckoCard__image {
     width: 100%;
     height: 200px;

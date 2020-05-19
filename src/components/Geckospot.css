@@ -21,7 +21,8 @@
 
 body {
     background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("../images/gecko_background.png");
-    background-size: 25%;
+    background-size: 380px;
+    background-position: 50% 0;
     font-family: Karla, sans-serif;
 }
 
@@ -150,6 +151,14 @@ body {
    50% { transform: rotate(-10deg); }
    75% { transform: rotate(10deg); }
   100% { transform: rotate(0deg); }
+}
+
+@keyframes jiggle {
+    0% { transform: rotate(0deg); transform-origin: 80% 50%; }
+   25% { transform: rotate(5deg); transform-origin: 80% 50%; }
+   50% { transform: rotate(-5deg); transform-origin: 80% 50%; }
+   75% { transform: rotate(5deg); transform-origin: 80% 50%; }
+  100% { transform: rotate(0deg); transform-origin: 80% 50%; }
 }
 
 @media only screen and (max-width: 500px) {
