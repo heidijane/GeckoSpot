@@ -6,15 +6,20 @@
 #navigation {
     border: solid 1px #FFBA91;
     background-color: #ffd087;
+    background-image: url(../../images/nav_background.png);
     color: #4a483c;
+    
 }
 
 .navLogo {
     font-family: Sniglet, sans-serif;
     font-size: 2em;
     letter-spacing: 2px;
-    padding: .15em .25em .15em .25em;
-    color: #c56b17;
+    padding: .15em .4em .15em .4em;
+}
+
+.navLogo img {
+    filter: sepia(10%) contrast(90%);
 }
 
 .navLink {
@@ -30,13 +35,13 @@
 }
 
 .navLink:hover {
-    background-color: #feb16a;
+    background-color: rgb(250, 225, 82);
 }
 
 .navLink:active {
-    background-color: #f19b4b;
+    background-color: rgb(240, 164, 71);
 }
 
 .navLink.currentPage {
-    background-color: #f19b4b;
+    background-color: rgb(240, 164, 71);
 }

@@ -39,6 +39,7 @@ export default ({ geckoId, addMealModalToggle, setMealObjectToEdit }) => {
                                     <div className="text-nowrap">
                                         <Button
                                     className="btn-sm m-1"
+                                    outline
                                     color="info"
                                     onClick={() => {
                                         setMealObjectToEdit(meal)
@@ -48,6 +49,7 @@ export default ({ geckoId, addMealModalToggle, setMealObjectToEdit }) => {
                                     >edit</Button>
                                     <Button 
                                         className="btn-sm"
+                                        outline
                                         color="danger"
                                         onClick={() => deleteMeal(meal.id)}
                                     >delete</Button>

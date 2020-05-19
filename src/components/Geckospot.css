@@ -88,8 +88,8 @@ body {
 /*Button adjustments*/
 
 .btn.btn-primary {
-    border-color: #f17539;
-    background-color: #f17539;
+    border-color: rgb(231, 146, 42);
+    background-color: rgb(231, 146, 42);
 }
 .btn.btn-primary:hover {
     border-color: #da5f25;

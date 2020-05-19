@@ -126,7 +126,7 @@ export default ( props ) => {
                     outline
                     color="secondary"
                     onClick={editGeckoToggle}
-                    ><img src={require("../../images/icon_edit.png")} alt="change morph"/> Edit Gecko Info</Button>
+                    ><img src={require("../../images/icon_edit.png")} alt="edit gecko info"/> Edit Gecko Info</Button>
                     <Button 
                     className="btn-sm invert btn-block mt-2"
                     outline
@@ -157,7 +157,7 @@ export default ( props ) => {
                         outline
                         color="secondary"
                         onClick={parentModalToggle}
-                        ><img src={require("../../images/icon_family.png")} alt="change morph"/> Update Parents</Button>
+                        ><img src={require("../../images/icon_family.png")} alt="update gecko parents"/> Update Parents</Button>
                 </div>
             </section>
             <section className="geckoDetails__rightColumn">
@@ -169,14 +169,14 @@ export default ( props ) => {
                     color="success"
                     onClick={sellModalToggle}
                     >
-                        Sell in Marketplace
+                        <img src={require("../../images/icon_sell.png")} alt="sell gecko"/> Sell in Marketplace
                     </Button>
                 ) : (
                     <Button
                     color="success"
                     onClick={listingModalToggle}
                     >
-                        Listing Details
+                        <img src={require("../../images/icon_sell.png")} alt="marketplace listing"/> Listing Details
                     </Button>
                 )}
                 <Button

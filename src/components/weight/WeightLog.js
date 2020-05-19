@@ -109,6 +109,7 @@ export default ({ geckoId }) => {
                                     <div className="text-nowrap">
                                     <Button 
                                         className="btn-sm"
+                                        outline
                                         color="danger"
                                         onClick={() => deleteWeight(weight.id)}
                                     >delete</Button>
