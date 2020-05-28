@@ -4,9 +4,9 @@ GeckoSpot is a single-page application built in React that allows users to manag
 
 ## Installation
 
-Along with the GeckoSpot repository, you will need to clone the (https://github.com/heidijane/geckospot-api)[GeckoSpot-Api] repo as well which contains the data structure and some gecko data for you to play around with.
+Along with the GeckoSpot repository, you will need to clone the [GeckoSpot-Api](https://github.com/heidijane/geckospot-api) repo as well which contains the data structure and some gecko data for you to play around with.
 
-You will need (https://www.npmjs.com/package/json-server)[json-server] installed in order to create the persistant data storage.
+You will need [json-server](https://www.npmjs.com/package/json-server) installed in order to create the persistant data storage.
 
 To start the json server, run the following command in your terminal inside of the geckospot-api directory:
 
