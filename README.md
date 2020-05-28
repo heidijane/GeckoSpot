@@ -16,14 +16,14 @@ To start the application, run the following command in your terminal inside of t
 ```bash
 npm start
 ```
-##Dummy User Data
+## Dummy User Data
 
 To quickly get to the gecko goodness login with the follwing dummy user data:
 
 Username: heidi
 Password: 1234
 
-##Technologies Used
+## Technologies Used
 
 [https://reactjs.org/](React)
 [https://reactstrap.github.io/](Reactstrap) for speedy styling
@@ -32,14 +32,14 @@ Password: 1234
 [https://dbdiagram.io/home](dbdiagram.io) for data structure planning
 [https://sketchboard.me/home](Sketchboard.me) for easy wireframing
 
-##Other Goodies
+## Other Goodies
 
 [https://github.com/afialapis/reactstrap-date-picker](reactstrap-date-picker) for date pickin' made easy!
 [https://github.com/blakeembrey/pluralize](pluralize) for making a word plural or singular easily
 [https://github.com/nkbt/react-copy-to-clipboard](react-copy-to-clipboard) implement copy to clipboard in a snap
 [https://github.com/jerairrest/react-chartjs-2](react-chartjs-2) for using Chart.js in React
 
-##Image Credits
+## Image Credits
 
 Adorable tiled gecko background illustration by [https://malkshake.tumblr.com/](Malky)
 Various icons from [https://icons8.com/](icons8)
